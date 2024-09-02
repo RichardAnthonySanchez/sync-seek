@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -19,32 +20,22 @@ const __dirname = dirname(__filename);
 console.log(__dirname);
 
 const app = express();
+app.use(cors()); // Enable CORS for all routes
 
 app.get("/", async (req, res) => {
   const artist = "Coldplay"; // Example artist, or you could use a query parameter
   try {
     const data = await getSimilarArtists(artist);
-    res.send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Similar Artists</title>
-        </head>
-        <body>
-          <h1>Similar Artists for ${artist}</h1>
-          <ul>
-            ${data.similarartists.artist
-              .map((a) => `<li>${a.name}</li>`)
-              .join("")}
-          </ul>
-          <script src="index.js" type="module"></script>
-        </body>
-        </html>
-      `);
+    console.log("Data to be sent:", data); // Log the data being sent
+
+    if (!data) {
+      res.status(204).send(); // No Content if data is empty
+    } else {
+      res.json(data); // Send the data as JSON
+    }
   } catch (error) {
-    res.status(500).send("Error fetching similar artists");
+    console.error("Error fetching similar artists:", error);
+    res.status(500).json({ error: "Error fetching similar artists" });
   }
 });
 

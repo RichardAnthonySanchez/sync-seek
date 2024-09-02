@@ -7,20 +7,19 @@ const apiKey = process.env.API_KEY;
 const url = process.env.LASTFM_API_BASE;
 
 const getSimilarArtists = async (artist) => {
-  console.log("artist name submitted is " + artist);
-  console.log("url is " + url);
-  const params = {
-    method: "artist.getsimilar",
-    artist: artist,
-    api_key: apiKey,
-    format: "json",
-  };
-
   try {
+    const params = {
+      method: "artist.getsimilar",
+      artist: artist,
+      api_key: apiKey,
+      format: "json",
+    };
     const response = await axios.get(url, { params });
-    console.log(response.data);
+    console.log("API Response:", response.data);
+    return response.data;
   } catch (error) {
     console.error("Error fetching similar artists:", error);
+    throw new Error("Failed to fetch similar artists");
   }
 };
 

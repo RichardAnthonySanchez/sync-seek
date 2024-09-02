@@ -4,4 +4,4 @@ function artistQuery() {
   return input;
 }
 
-artistQuery();
+export default artistQuery;
