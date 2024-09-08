@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const apiKey = process.env.API_KEY;
 async function fetchSimilarArtists(artist) {
   axios
-    .get("https://jsonplaceholder.typicode.com/todos")
+    .get(
+      `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${apiKey}&format=json`
+    )
     .then((response) => console.log(response.data))
     .catch((error) => console.error(error));
 
