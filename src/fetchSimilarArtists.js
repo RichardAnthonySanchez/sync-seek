@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiKey = process.env.API_KEY;
+
 async function fetchSimilarArtists(artist) {
   axios
     .get(
@@ -9,7 +10,7 @@ async function fetchSimilarArtists(artist) {
     .then((response) => console.log(response.data))
     .catch((error) => console.error(error));
 
-  displayArtists(response);
+  //displayArtists(response);
 }
 
 function displayArtists(artists) {

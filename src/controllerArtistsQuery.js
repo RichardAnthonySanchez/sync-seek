@@ -1,8 +1,13 @@
 function artistQuery() {
-  const input = prompt("submit an artist");
-  console.log("artist query is reading input as " + input);
-
-  return input;
+  document.addEventListener("click", async (event) => {
+    let artist;
+    if (event.target.id === "submit-form") {
+      event.preventDefault();
+      artist = document.getElementById("input").value;
+      console.log(artist);
+    }
+    return artist;
+  });
 }
 
 export default artistQuery;

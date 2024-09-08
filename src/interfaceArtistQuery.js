@@ -3,7 +3,6 @@ import fetchSimilarArtists from "./fetchSimilarArtists.js";
 
 function interfaceArtistQuery() {
   const artist = artistQuery();
-  fetchSimilarArtists(artist);
 }
 
 export default interfaceArtistQuery;
