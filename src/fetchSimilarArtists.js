@@ -3,6 +3,7 @@ import axios from "axios";
 const apiKey = process.env.API_KEY;
 
 async function fetchSimilarArtists(artist) {
+  console.log("fetching for artist: " + artist + " ...");
   axios
     .get(
       `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${apiKey}&format=json`
