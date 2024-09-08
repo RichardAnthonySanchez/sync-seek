@@ -1,26 +1,19 @@
-async function fetchSimilarArtists() {
-  try {
-    const response = await fetch("http://localhost:3000/");
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+import axios from "axios";
 
-    const text = await response.text(); // Get the raw response text
-    console.log("Raw response body:", text); // Log the raw response
+async function fetchSimilarArtists(artist) {
+  axios
+    .get("https://jsonplaceholder.typicode.com/todos")
+    .then((response) => console.log(response.data))
+    .catch((error) => console.error(error));
 
-    const data = JSON.parse(text); // Parse the JSON
-    console.log(data); // Display the data in the console or use it in your UI
-    displayArtists(data.similarartists.artist); // Assuming 'similarartists' is the key in your data
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-  }
+  displayArtists(response);
 }
 
 function displayArtists(artists) {
   const artistList = document.getElementById("artist-list");
   artists.forEach((artist) => {
     const listItem = document.createElement("li");
-    listItem.textContent = artist.name;
+    listItem.textContent = artist.title;
     artistList.appendChild(listItem);
   });
 }
