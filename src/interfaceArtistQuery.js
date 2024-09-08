@@ -1,4 +1,4 @@
-import artistQuery from "./controllerArtistQuery.js";
+import artistQuery from "./controllerArtistsQuery.js";
 import fetchSimilarArtists from "./fetchSimilarArtists.js";
 
 function interfaceArtistQuery() {
@@ -6,4 +6,4 @@ function interfaceArtistQuery() {
   fetchSimilarArtists(artist);
 }
 
-interfaceArtistQuery();
+export default interfaceArtistQuery;
