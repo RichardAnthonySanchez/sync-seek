@@ -1,5 +1,8 @@
+import interfaceArtistQuery from "./interfaceArtistQuery";
+
 function component() {
-  console.log("test");
+  // promt the user with the query
+  interfaceArtistQuery();
 }
 
 document.body.appendChild(component());
