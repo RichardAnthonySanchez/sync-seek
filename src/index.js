@@ -1,10 +1,9 @@
-import interfaceArtistQuery from "./interfaceArtistQuery";
 import createForm from "./viewQueryForm";
+import artistQuery from "./controllerArtistsQuery";
 
 function component() {
   createForm();
-  // promt the user with the query
-  interfaceArtistQuery();
+  artistQuery();
 }
 
 document.body.appendChild(component());
