@@ -1,4 +1,5 @@
 import axios from "axios";
+import similarArtistsLocal from "./storeSimilarArtistsLocal";
 
 const apiKey = process.env.API_KEY;
 
@@ -8,10 +9,12 @@ async function fetchSimilarArtists(artist) {
     .get(
       `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${apiKey}&format=json`
     )
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      const artist = response.data;
+      console.log(artist);
+      similarArtistsLocal.storeArtist(artist);
+    })
     .catch((error) => console.error(error));
-
-  //displayArtists(response);
 }
 
 function displayArtists(artists) {
