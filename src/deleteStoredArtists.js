@@ -1,3 +1,3 @@
 export default function deleteStoredArtsits(keyName) {
-  removeItem(keyName);
+  localStorage.removeItem(keyName);
 }

@@ -11,7 +11,6 @@ function artistQuery() {
       artist = document.getElementById("input").value;
       interfaceArtistQuery(artist);
     } else if (event.target.id === "delete-artists") {
-      event.preventDefault();
       deleteStoredArtistsInterface("artistsKey");
     }
     return artist;
