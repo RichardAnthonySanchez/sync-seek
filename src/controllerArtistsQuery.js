@@ -1,4 +1,7 @@
-import interfaceArtistQuery from "./interfaceArtistQuery";
+import {
+  interfaceArtistQuery,
+  deleteStoredArtistsInterface,
+} from "./interfaceArtistQuery";
 
 function artistQuery() {
   document.addEventListener("click", async (event) => {
@@ -7,6 +10,9 @@ function artistQuery() {
       event.preventDefault();
       artist = document.getElementById("input").value;
       interfaceArtistQuery(artist);
+    } else if (event.target.id === "delete-artists") {
+      event.preventDefault();
+      deleteStoredArtistsInterface("artistsKey");
     }
     return artist;
   });

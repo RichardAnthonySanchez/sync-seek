@@ -1,7 +1,10 @@
 import fetchSimilarArtists from "./fetchSimilarArtists.js";
+import deleteStoredArtsits from "./deleteStoredArtists.js";
 
-function interfaceArtistQuery(artist) {
+export function interfaceArtistQuery(artist) {
   fetchSimilarArtists(artist);
 }
 
-export default interfaceArtistQuery;
+export function deleteStoredArtistsInterface(keyName) {
+  deleteStoredArtsits(keyName);
+}
