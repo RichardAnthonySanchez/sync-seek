@@ -12,7 +12,8 @@ async function fetchSimilarArtists(artist) {
     .then((response) => {
       const artist = response.data;
       console.log(artist);
-      similarArtistsLocal.storeArtist(artist);
+      similarArtistsLocal.storeArtist(artist); // maybe don't couple this. try connecting it to an interface.
+      similarArtistsLocal.getArtists();
     })
     .catch((error) => console.error(error));
 }
