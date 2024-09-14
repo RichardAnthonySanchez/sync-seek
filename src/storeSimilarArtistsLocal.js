@@ -1,10 +1,14 @@
 const similarArtistsLocal = (function () {
-  let artists = [];
   return {
     storeArtist: function (artistData) {
-      artists.push(artistData);
-      localStorage.setItem("artistsKey", JSON.stringify(artists));
+      const artistNames = this.getArtistNames(artistData);
+      localStorage.setItem("artistsKey", JSON.stringify(artistNames));
       console.log("storing similar artists...");
+    },
+    getArtistNames: function (data) {
+      const artists = data.similarartists.artist;
+      const artistNames = artists.map((artist) => artist.name);
+      return artistNames;
     },
     getArtists: function () {
       const localArtists = localStorage.getItem("artistsKey");
