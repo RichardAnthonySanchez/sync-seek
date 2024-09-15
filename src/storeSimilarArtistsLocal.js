@@ -14,7 +14,7 @@ const similarArtistsLocal = (function () {
       const localArtists = localStorage.getItem(artistKey);
       const parsedArtists = JSON.parse(localArtists);
       console.log("artists stored on local storage:" + localArtists.length);
-      return parsedArtists;
+      return { artistKey, parsedArtists };
     },
   };
 })();
