@@ -10,10 +10,9 @@ async function fetchSimilarArtists(artist) {
       `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${artist}&api_key=${apiKey}&format=json`
     )
     .then((response) => {
-      const artist = response.data;
-      console.log(artist);
-      similarArtistsLocal.storeArtist(artist); // maybe don't couple this. try connecting it to an interface.
-      similarArtistsLocal.getArtists();
+      const data = response.data;
+      similarArtistsLocal.storeArtist(data, artist); // maybe don't couple this. try connecting it to an interface.
+      similarArtistsLocal.getArtists(artist);
     })
     .catch((error) => console.error(error));
 }
