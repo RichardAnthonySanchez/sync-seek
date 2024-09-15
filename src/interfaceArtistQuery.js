@@ -1,5 +1,6 @@
 import fetchSimilarArtists from "./fetchSimilarArtists.js";
 import deleteStoredArtsits from "./deleteStoredArtists.js";
+import _ from "lodash";
 
 export function interfaceArtistQuery(artistOne, artistTwo) {
   fetchSimilarArtists(artistOne);
@@ -12,4 +13,10 @@ export function deleteStoredArtistsInterface(keyNames) {
     deleteStoredArtsits(keyNames[i]);
     console.log("deleting the following artist: " + keyNames[i]);
   }
+}
+
+export function artistsIntersectionInterface(listOne, listTwo) {
+  const artistIntersection = _.intersection(listOne, listTwo);
+  console.log(artistIntersection);
+  return artistIntersection;
 }
