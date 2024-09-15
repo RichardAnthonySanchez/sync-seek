@@ -17,14 +17,25 @@ export function deleteStoredArtistsInterface(keyNames) {
 }
 
 export function getArtistLists(keyNames) {
+  let listOne;
+  let listTwo;
+
   for (let i = 0; i < keyNames.length; i++) {
-    const list = similarArtistsLocal.getArtistNames(keyNames[i]);
-    console.log(list);
+    const res = similarArtistsLocal.getArtists(keyNames[i]);
+    const artistName = res.artistKey;
+    const artistsList = res.parsedArtists;
+
+    if (!listOne) {
+      listOne = artistsList;
+    } else {
+      listTwo = artistsList;
+    }
   }
+  artistsIntersectionInterface(listOne, listTwo);
 }
 
 export function artistsIntersectionInterface(listOne, listTwo) {
   const artistIntersection = _.intersection(listOne, listTwo);
-  console.log(artistIntersection);
+  console.log("this is your list of matching artists: " + artistIntersection);
   return artistIntersection;
 }
