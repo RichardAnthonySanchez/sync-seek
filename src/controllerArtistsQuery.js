@@ -8,8 +8,9 @@ function artistQuery() {
     let artist;
     if (event.target.id === "submit-form") {
       event.preventDefault();
-      artist = document.getElementById("input").value;
-      interfaceArtistQuery(artist);
+      artistOne = document.getElementById("input1").value;
+      artistTwo = document.getElementById("input2").value;
+      interfaceArtistQuery(artistOne, artistTwo);
     } else if (event.target.id === "delete-artists") {
       deleteStoredArtistsInterface("artistsKey");
     }
