@@ -1,25 +1,26 @@
 function createForm() {
-  // Create form element
   const form = document.createElement("form");
   form.id = "form";
 
-  // Create input element
-  const input = document.createElement("input");
-  input.type = "text";
-  input.id = "input";
-  input.placeholder = "Enter artist";
+  const input1 = document.createElement("input");
+  input1.type = "text";
+  input1.id = "input1";
+  input1.placeholder = "Enter first artist";
 
-  // Create button element
+  const input2 = document.createElement("input");
+  input2.type = "text";
+  input2.id = "input2";
+  input2.placeholder = "Enter second artist";
+
   const button = document.createElement("button");
   button.id = "submit-form";
   button.type = "submit";
   button.textContent = "Submit";
 
-  // Append input and button to the form
-  form.appendChild(input);
+  form.appendChild(input1);
+  form.appendChild(input2);
   form.appendChild(button);
 
-  // Append form to the body (or any other container element)
   document.body.appendChild(form);
 }
 
