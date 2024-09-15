@@ -1,6 +1,7 @@
 import {
   interfaceArtistQuery,
   deleteStoredArtistsInterface,
+  getArtistLists,
 } from "./interfaceArtistQuery";
 
 function artistQuery() {
@@ -15,6 +16,8 @@ function artistQuery() {
       interfaceArtistQuery(artistOne, artistTwo);
     } else if (event.target.id === "delete-artists") {
       deleteStoredArtistsInterface(listOfKeyNames);
+    } else if (event.target.id === "sort-artists") {
+      getArtistLists(listOfKeyNames);
     }
   });
 }
