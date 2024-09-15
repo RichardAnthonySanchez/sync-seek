@@ -6,6 +6,10 @@ export function interfaceArtistQuery(artistOne, artistTwo) {
   fetchSimilarArtists(artistTwo);
 }
 
-export function deleteStoredArtistsInterface(keyName) {
-  deleteStoredArtsits(keyName);
+export function deleteStoredArtistsInterface(keyNames) {
+  console.log("checking storage for the following artists: " + keyNames);
+  for (let i = 0; i < keyNames.length; i++) {
+    deleteStoredArtsits(keyNames[i]);
+    console.log("deleting the following artist: " + keyNames[i]);
+  }
 }
