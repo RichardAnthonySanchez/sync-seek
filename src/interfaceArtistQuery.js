@@ -1,5 +1,6 @@
 import fetchSimilarArtists from "./fetchSimilarArtists.js";
 import deleteStoredArtsits from "./deleteStoredArtists.js";
+import similarArtistsLocal from "./storeSimilarArtistsLocal.js";
 import _ from "lodash";
 
 export function interfaceArtistQuery(artistOne, artistTwo) {
@@ -12,6 +13,13 @@ export function deleteStoredArtistsInterface(keyNames) {
   for (let i = 0; i < keyNames.length; i++) {
     deleteStoredArtsits(keyNames[i]);
     console.log("deleting the following artist: " + keyNames[i]);
+  }
+}
+
+export function getArtistLists(keyNames) {
+  for (let i = 0; i < keyNames.length; i++) {
+    const list = similarArtistsLocal.getArtistNames(keyNames[i]);
+    console.log(list);
   }
 }
 
