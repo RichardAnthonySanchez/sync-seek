@@ -1,7 +1,7 @@
-import createForm from "./viewQueryForm";
-import artistQuery from "./controllerArtistsQuery";
-import viewButtonDeleteArtists from "./viewButtonDeleteArtists";
-import viewButtonSortArtists from "./viewButtonSortArtists";
+import createForm from "./getSimilarArtists/viewQueryForm";
+import artistQuery from "./getSimilarArtists/controllerArtistsQuery";
+import viewButtonDeleteArtists from "./deleteArtists/viewButtonDeleteArtists";
+import viewButtonSortArtists from "./sortSimilarArtists/viewButtonSortArtists";
 
 function component() {
   createForm();
