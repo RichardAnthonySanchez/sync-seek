@@ -1,5 +1,5 @@
 import fetchSimilarArtists from "./fetchSimilarArtists.js";
-import deleteStoredArtsits from "./deleteStoredArtists.js";
+import deleteStoredArtsits from "../deleteArtists/deleteStoredArtists.js";
 import similarArtistsLocal from "./storeSimilarArtistsLocal.js";
 import _ from "lodash";
 
