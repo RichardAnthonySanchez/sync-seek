@@ -1,10 +1,10 @@
-import createForm from "./getSimilarArtists/viewQueryForm";
 import artistQuery from "./getSimilarArtists/controllerArtistsQuery";
 import viewButtonDeleteArtists from "./deleteArtists/viewButtonDeleteArtists";
 import viewButtonSortArtists from "./sortSimilarArtists/viewButtonSortArtists";
+import createTrackGetSimilarForm from "./trackGetSimilar/viewTrackGetSimilarForm";
 
 function component() {
-  createForm();
+  createTrackGetSimilarForm();
   artistQuery();
   viewButtonDeleteArtists();
   viewButtonSortArtists();
