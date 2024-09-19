@@ -4,12 +4,12 @@ function createTrackGetSimilarForm() {
 
   const songNameInput = document.createElement("input");
   songNameInput.type = "text";
-  songNameInput.class = "song-name-input";
+  songNameInput.className = "song-name-input";
   songNameInput.placeholder = "Enter song name";
 
   const artistNameInput = document.createElement("input");
   artistNameInput.type = "text";
-  artistNameInput.class = "artist-name-input";
+  artistNameInput.className = "artist-name-input";
   artistNameInput.placeholder = "Enter artist name";
 
   const button = document.createElement("button");
