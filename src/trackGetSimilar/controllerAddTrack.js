@@ -1,3 +1,5 @@
+import interfaceTrackGetSimilar from "./interfaceTrackGetSimiliar";
+
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
     if (event.target.id === "submit-track-get-similar-form") {
@@ -8,12 +10,7 @@ function controllerAddTrack() {
       songInputs.forEach((input, index) => {
         const songName = input.value;
         const artistName = artistInputs[index].value;
-        console.log(
-          "Your artist name is: " +
-            artistName +
-            " and your song name is: " +
-            songName
-        );
+        interfaceTrackGetSimilar(artistName, songName);
       });
     }
   });
