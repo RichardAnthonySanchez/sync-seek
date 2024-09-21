@@ -1,4 +1,7 @@
-import interfaceTrackGetSimilar from "./interfaceTrackGetSimiliar";
+import {
+  interfaceTrackGetSimilar,
+  storeSimilarTracksList,
+} from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -7,10 +10,15 @@ function controllerAddTrack() {
       const songInputs = document.querySelectorAll(".song-name-input");
       const artistInputs = document.querySelectorAll(".artist-name-input");
 
-      songInputs.forEach((input, index) => {
+      // this for each section could be a separate method in a interface object
+      songInputs.forEach(async (input, index) => {
         const songName = input.value;
         const artistName = artistInputs[index].value;
-        interfaceTrackGetSimilar(artistName, songName);
+        const eachTracksList = await interfaceTrackGetSimilar(
+          artistName,
+          songName
+        );
+        await storeSimilarTracksList(artistName, songName, eachTracksList);
       });
     }
   });
