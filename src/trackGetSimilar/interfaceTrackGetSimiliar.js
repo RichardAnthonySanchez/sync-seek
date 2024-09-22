@@ -1,5 +1,6 @@
 import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
 import { storeSimilarTracksLocally } from "./storeSimilarTracks";
+import { createTrackInput } from "./viewTrackGetSimilarForm";
 
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
@@ -11,4 +12,8 @@ export async function interfaceTrackGetSimilar(artist, song) {
 
 export async function storeSimilarTracksList(artist, song, list) {
   await storeSimilarTracksLocally(artist, song, list);
+}
+
+export function interfaceCreateTrackInput() {
+  createTrackInput();
 }
