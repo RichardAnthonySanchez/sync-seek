@@ -1,4 +1,4 @@
-function createTrackGetSimilarForm() {
+export function createTrackGetSimilarForm() {
   const form = document.createElement("form");
   form.id = "track-get-similar-form";
 
@@ -24,4 +24,19 @@ function createTrackGetSimilarForm() {
   document.body.appendChild(form);
 }
 
-export default createTrackGetSimilarForm;
+export function createTrackInput() {
+  const form = document.getElementById("track-get-similar-form");
+
+  const songNameInput = document.createElement("input");
+  songNameInput.type = "text";
+  songNameInput.className = "song-name-input";
+  songNameInput.placeholder = "Enter song name";
+
+  const artistNameInput = document.createElement("input");
+  artistNameInput.type = "text";
+  artistNameInput.className = "artist-name-input";
+  artistNameInput.placeholder = "Enter artist name";
+
+  form.appendChild(songNameInput);
+  form.appendChild(artistNameInput);
+}
