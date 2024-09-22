@@ -1,6 +1,7 @@
 import {
   interfaceTrackGetSimilar,
   storeSimilarTracksList,
+  interfaceCreateTrackInput,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
@@ -20,6 +21,8 @@ function controllerAddTrack() {
         );
         await storeSimilarTracksList(artistName, songName, eachTracksList);
       });
+    } else if (event.target.id === "add-track") {
+      interfaceCreateTrackInput();
     }
   });
 }
