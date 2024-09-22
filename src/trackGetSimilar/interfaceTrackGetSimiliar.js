@@ -1,5 +1,9 @@
 import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
-import { storeSimilarTracksLocally } from "./storeSimilarTracks";
+import modelFilterTracks from "./modelFilterTracks";
+import {
+  storeSimilarTracksLocally,
+  getStoredSimilarTrackLists,
+} from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
 
 export async function interfaceTrackGetSimilar(artist, song) {
@@ -16,4 +20,15 @@ export async function storeSimilarTracksList(artist, song, list) {
 
 export function interfaceCreateTrackInput() {
   createTrackInput();
+}
+
+export function getStoredSimilarTrackListsInterface() {
+  const lists = getStoredSimilarTrackLists();
+  return lists;
+}
+
+export function getAlikeTracksInterface() {
+  const lists = getStoredSimilarTrackListsInterface();
+  const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
+  return alikeTracks;
 }
