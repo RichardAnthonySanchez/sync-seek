@@ -1,4 +1,4 @@
-export function storeArtistLocally(song, artist, list) {
+export function storeSimilarTracksLocally(song, artist, list) {
   localStorage.setItem(`${song}-${artist}`, JSON.stringify(list));
   console.log(`storing similar tracks to ${song} by ${artist}...`);
 

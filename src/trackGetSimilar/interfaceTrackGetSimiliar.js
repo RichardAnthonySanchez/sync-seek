@@ -1,5 +1,5 @@
 import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
-import { storeArtistLocally } from "./storeSimilarTracks";
+import { storeSimilarTracksLocally } from "./storeSimilarTracks";
 
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
@@ -10,5 +10,5 @@ export async function interfaceTrackGetSimilar(artist, song) {
 }
 
 export async function storeSimilarTracksList(artist, song, list) {
-  await storeArtistLocally(artist, song, list);
+  await storeSimilarTracksLocally(artist, song, list);
 }
