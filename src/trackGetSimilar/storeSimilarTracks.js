@@ -13,15 +13,16 @@ export function storeSimilarTracksLocally(song, artist, list) {
   // create a master key of our lists and check each key to see if it is already in the master key list
   let listOfKeys = JSON.parse(localStorage.getItem("masterKey")) || [];
 
+  // store all non-duplicate the keys to the master key
   if (!listOfKeys.includes(`${song}-${artist}`)) {
     listOfKeys.push(`${song}-${artist}`);
     console.log(`successfully pushed, ${song} by ${artist}, to the master key`);
   } else {
     console.log("already had that song in the local storage");
   }
-  // store all non-duplicate the keys to the master key
   console.log(" your list of master keys are: " + JSON.stringify(listOfKeys));
   // our keys have whitespace. we will probably want to change that later
+  localStorage.removeItem("masterKey");
   localStorage.setItem("masterKey", JSON.stringify(listOfKeys));
 }
 

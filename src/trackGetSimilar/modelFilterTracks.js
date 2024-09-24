@@ -11,7 +11,7 @@ const modelFilterTracks = (function () {
           }
           trackCount[track.name]++;
         })
-      ); // this nested mapping is something i'm not used to. i'm going to have to practice this more
+      );
 
       for (const track in trackCount) {
         if (trackCount[track] > 1) {
@@ -20,7 +20,7 @@ const modelFilterTracks = (function () {
       }
 
       console.log("this is your list of matching tracks: " + matchingTracks);
-      return matchingTracks;
+      return matchingTracks; // can we feed all matching tracks back into the fetch request to extend the list indefinately?
     },
   };
 })();
