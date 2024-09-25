@@ -6,16 +6,21 @@ const modelFilterTracks = (function () {
 
       lists.map((list) =>
         list.similartracks.track.map((track) => {
+          const trackName = track.name;
+          const artistName = track.artist.name;
           if (!trackCount[track.name]) {
-            trackCount[track.name] = 0;
+            trackCount[trackName] = { count: 0, artist: artistName };
           }
-          trackCount[track.name]++;
+          trackCount[trackName].count++;
         })
       );
 
-      for (const track in trackCount) {
-        if (trackCount[track] > 1) {
-          matchingTracks.push(track);
+      for (const trackName in trackCount) {
+        if (trackCount[trackName].count > 1) {
+          matchingTracks.push({
+            track: trackName,
+            artist: trackCount[trackName].artist,
+          });
         }
       }
 
