@@ -24,7 +24,10 @@ const modelFilterTracks = (function () {
         }
       }
 
-      console.log("this is your list of matching tracks: " + matchingTracks);
+      console.log(
+        "this is your list of matching tracks: " +
+          JSON.stringify(matchingTracks)
+      );
       return matchingTracks; // can we feed all matching tracks back into the fetch request to extend the list indefinately?
     },
   };
