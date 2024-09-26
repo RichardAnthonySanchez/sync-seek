@@ -21,7 +21,6 @@ export function storeSimilarTracksLocally(song, artist, list) {
     console.log("already had that song in the local storage");
   }
   // our keys have whitespace. we will probably want to change that later
-  localStorage.removeItem("masterKey"); // this isn't removing anything from the model. the model is still finding our old search history
   localStorage.setItem("masterKey", JSON.stringify(listOfKeys));
   console.log(" your list of master keys are: " + JSON.stringify(listOfKeys));
 }
@@ -32,4 +31,8 @@ export function getStoredSimilarTrackLists() {
   const lists = listOfKeys.map((key) => JSON.parse(localStorage.getItem(key)));
 
   return lists;
+}
+
+export function deleteMasterKeysLocally() {
+  localStorage.removeItem("masterKey");
 }
