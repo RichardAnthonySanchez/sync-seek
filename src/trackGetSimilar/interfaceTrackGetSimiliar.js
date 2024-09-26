@@ -3,6 +3,7 @@ import modelFilterTracks from "./modelFilterTracks";
 import {
   storeSimilarTracksLocally,
   getStoredSimilarTrackLists,
+  deleteMasterKeysLocally,
 } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
 
@@ -31,4 +32,8 @@ export function getAlikeTracksInterface() {
   const lists = getStoredSimilarTrackListsInterface();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   return alikeTracks;
+}
+
+export function deleteMasterKeysInterface() {
+  deleteMasterKeysLocally();
 }
