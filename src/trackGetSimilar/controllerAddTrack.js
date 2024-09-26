@@ -3,12 +3,14 @@ import {
   storeSimilarTracksList,
   interfaceCreateTrackInput,
   getAlikeTracksInterface,
+  deleteMasterKeysInterface,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
     if (event.target.id === "submit-track-get-similar-form") {
       event.preventDefault();
+      deleteMasterKeysInterface();
       const songInputs = document.querySelectorAll(".song-name-input");
       const artistInputs = document.querySelectorAll(".artist-name-input");
 
@@ -21,7 +23,7 @@ function controllerAddTrack() {
           songName
         );
         await storeSimilarTracksList(artistName, songName, eachTracksList);
-        const alikeTracks = await getAlikeTracksInterface();
+        await getAlikeTracksInterface();
       });
     } else if (event.target.id === "add-track") {
       interfaceCreateTrackInput();
