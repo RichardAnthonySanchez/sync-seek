@@ -28,6 +28,7 @@ const modelFilterTracks = (function () {
         "this is your list of matching tracks: " +
           JSON.stringify(matchingTracks)
       );
+      // console.log the matchingTracks length. this way, when we recursively fetch for more tracks, we should see the list length increase. this may be useful for testing
       return matchingTracks; // can we feed all matching tracks back into the fetch request to extend the list indefinately?
     },
   };

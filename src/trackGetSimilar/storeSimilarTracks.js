@@ -23,6 +23,7 @@ export function storeSimilarTracksLocally(song, artist, list) {
   // our keys have whitespace. we will probably want to change that later
   localStorage.setItem("masterKey", JSON.stringify(listOfKeys));
   console.log(" your list of master keys are: " + JSON.stringify(listOfKeys));
+  console.log("your list of master keys is as long as: " + listOfKeys.length);
 }
 
 export function getStoredSimilarTrackLists() {
