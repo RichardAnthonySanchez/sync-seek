@@ -3,6 +3,7 @@ import viewButtonSortArtists from "./sortSimilarArtists/viewButtonSortArtists";
 import { createTrackGetSimilarForm } from "./trackGetSimilar/viewTrackGetSimilarForm";
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
+import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
 
 function component() {
   createTrackGetSimilarForm();
@@ -11,6 +12,7 @@ function component() {
   viewAddTrackButton();
   viewButtonDeleteArtists();
   viewButtonSortArtists();
+  ViewExtendSimilarTracksButton();
 }
 
 document.body.appendChild(component());
