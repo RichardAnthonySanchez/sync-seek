@@ -7,6 +7,7 @@ import {
   deleteMasterKeysLocally,
 } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
+import { indexedDBService } from "./serviceIndexedDB";
 
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
@@ -69,4 +70,8 @@ export async function extendSimilarTracksInterface() {
 
   // Filter the lists to return only tracks that have a match
   getAlikeTracksInterface();
+}
+
+export function initializeIndexedDB() {
+  indexedDBService.intializeDB();
 }

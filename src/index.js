@@ -4,6 +4,7 @@ import { createTrackGetSimilarForm } from "./trackGetSimilar/viewTrackGetSimilar
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
+import { initializeIndexedDB } from "./trackGetSimilar/interfaceTrackGetSimiliar";
 
 function component() {
   createTrackGetSimilarForm();
@@ -13,6 +14,7 @@ function component() {
   viewButtonDeleteArtists();
   viewButtonSortArtists();
   ViewExtendSimilarTracksButton();
+  initializeIndexedDB();
 }
 
 document.body.appendChild(component());
