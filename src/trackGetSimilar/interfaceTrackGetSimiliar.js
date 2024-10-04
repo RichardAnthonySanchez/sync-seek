@@ -18,7 +18,8 @@ export async function interfaceTrackGetSimilar(artist, song) {
 }
 
 export async function storeSimilarTracksList(artist, song, list) {
-  await storeSimilarTracksLocally(artist, song, list);
+  //await storeSimilarTracksLocally(artist, song, list);
+  indexedDBService.saveSimilarTracksList(artist, song, list);
 }
 
 export function interfaceCreateTrackInput() {
