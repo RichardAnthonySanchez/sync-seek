@@ -48,5 +48,28 @@ export const indexedDBService = (function () {
         console.error("Database error saving track:", request.error);
       };
     },
+    getAllSimilarTracksList: function () {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction("tracks", "readonly");
+        const store = transaction.objectStore("tracks");
+        const request = store.getAll();
+
+        request.onsuccess = function (event) {
+          const allTracks = event.target.result;
+          if (allTracks.length > 0) {
+            const similarTracksList = allTracks.map(
+              (track) => track.similarTracks
+            );
+            resolve(similarTracksList);
+          } else {
+            resolve([]);
+          }
+        };
+
+        request.onerror = function () {
+          reject(request.error);
+        };
+      });
+    },
   };
 })();
