@@ -26,13 +26,14 @@ export function interfaceCreateTrackInput() {
   createTrackInput();
 }
 
-export function getStoredSimilarTrackListsInterface() {
-  const lists = getStoredSimilarTrackLists();
+export async function getStoredSimilarTrackListsInterface() {
+  const lists = await indexedDBService.getAllSimilarTracksList();
   return lists;
 }
 
-export function getAlikeTracksInterface() {
-  const lists = getStoredSimilarTrackListsInterface();
+export async function getAlikeTracksInterface() {
+  // this is triggered from every song individually rather than just the cohort. look into this
+  const lists = await getStoredSimilarTrackListsInterface();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   return alikeTracks;
 }
@@ -75,4 +76,9 @@ export async function extendSimilarTracksInterface() {
 
 export function initializeIndexedDB() {
   indexedDBService.intializeDB();
+}
+
+function getMasterKeysFromDB() {
+  // do we even need master keys if all our tracks are accessed via the keyPath
+  // indexedDBService get tracks
 }
