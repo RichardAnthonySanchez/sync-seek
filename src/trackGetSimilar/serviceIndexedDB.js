@@ -1,16 +1,21 @@
 export const indexedDBService = (function () {
   let db;
+  let versionNumber = 3;
 
   return {
     intializeDB: function () {
       return new Promise((resolve, reject) => {
-        const openRequest = indexedDB.open("MusicTracksDB", 1);
+        const openRequest = indexedDB.open("MusicTracksDB", versionNumber);
 
         openRequest.onupgradeneeded = function (event) {
           db = event.target.result;
 
           if (!db.objectStoreNames.contains("tracks")) {
-            db.createObjectStore("tracks", { keyPath: "trackName" }); // we're getting an error. when we save data, we need to evaluate a key path. look this up
+            db.createObjectStore("tracks", { keyPath: "trackName" });
+          }
+
+          if (!db.objectStoreNames.contains("masterKeys")) {
+            db.createObjectStore("masterKeys", { keyPath: "key" });
           }
         };
 
@@ -46,6 +51,20 @@ export const indexedDBService = (function () {
 
       request.onerror = function () {
         console.error("Database error saving track:", request.error);
+      };
+    },
+    saveMasterKeys: function (key) {
+      const transaction = db.transaction("masterKeys", "readwrite");
+      const store = transaction.objectStore("masterKeys");
+
+      const request = store.add({ key: key });
+
+      request.onsuccess = function () {
+        console.log(`${key} successfully to the master key list.`);
+      };
+
+      request.onerror = function () {
+        console.error("Database error saving key:", request.error);
       };
     },
     getAllSimilarTracksList: function () {

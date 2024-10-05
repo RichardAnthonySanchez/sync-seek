@@ -32,7 +32,6 @@ export async function getStoredSimilarTrackListsInterface() {
 }
 
 export async function getAlikeTracksInterface() {
-  // this is triggered from every song individually rather than just the cohort. look into this
   const lists = await getStoredSimilarTrackListsInterface();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   return alikeTracks;
@@ -81,4 +80,9 @@ export function initializeIndexedDB() {
 function getMasterKeysFromDB() {
   // do we even need master keys if all our tracks are accessed via the keyPath
   // indexedDBService get tracks
+}
+
+export function saveMasterKeysFromDBInterface(trackName) {
+  // this only saves the track name as a key. later we will want to make this a track name and an artist name
+  indexedDBService.saveMasterKeys(trackName);
 }

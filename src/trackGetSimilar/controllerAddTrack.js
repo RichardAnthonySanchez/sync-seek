@@ -5,6 +5,7 @@ import {
   getAlikeTracksInterface,
   deleteMasterKeysInterface,
   extendSimilarTracksInterface,
+  saveMasterKeysFromDBInterface,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
@@ -24,7 +25,8 @@ function controllerAddTrack() {
           songName
         );
         await storeSimilarTracksList(artistName, songName, eachTracksList);
-        await getAlikeTracksInterface();
+        await saveMasterKeysFromDBInterface(songName);
+        await getAlikeTracksInterface(); // this triggers for each track sent by the form. perhaps we can put this somewhere else, so it only triggers the cohort
       });
     } else if (event.target.id === "add-track") {
       interfaceCreateTrackInput();
