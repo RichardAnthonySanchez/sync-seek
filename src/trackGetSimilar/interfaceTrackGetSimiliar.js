@@ -77,12 +77,14 @@ export function initializeIndexedDB() {
   indexedDBService.intializeDB();
 }
 
-function getMasterKeysFromDB() {
-  // do we even need master keys if all our tracks are accessed via the keyPath
-  // indexedDBService get tracks
-}
-
 export function saveMasterKeysFromDBInterface(trackName) {
   // this only saves the track name as a key. later we will want to make this a track name and an artist name
   indexedDBService.saveMasterKeys(trackName);
+}
+
+export function getMasterKeysFromDBInterface() {
+  const masterKey = indexedDBService.getMasterKeys(); // run console logs to see if this is executing
+  return masterKey;
+  // this will be used instead of the get all track method.
+  // each item in the masterkey objectStore will be a query to find data in the tracks objectStore
 }

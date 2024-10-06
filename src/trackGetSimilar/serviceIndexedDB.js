@@ -90,5 +90,23 @@ export const indexedDBService = (function () {
         };
       });
     },
+    getMasterKeys: function () {
+      return new Promise((resolve, reject) => {
+        // im unfamiliar with this pattern. lets figure this out
+        const transaction = db.transaction("masterKeys", "readonly");
+        const store = transaction.objectStore("masterKeys");
+        const request = store.getAll();
+
+        request.onsuccess = function () {
+          console.log("testing in the store");
+          const allKeys = request.result; // Get the result from the request
+          resolve(allKeys); // Resolve the promise with the result
+        };
+
+        request.onerror = function () {
+          reject(request.error);
+        };
+      });
+    },
   };
 })();
