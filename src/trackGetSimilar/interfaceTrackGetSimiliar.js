@@ -28,6 +28,8 @@ export function interfaceCreateTrackInput() {
 
 export async function getStoredSimilarTrackListsInterface() {
   const lists = await indexedDBService.getAllSimilarTracksList();
+  const listsFromMasterKey = indexedDBService.getSimilarTracksFromMasterKey();
+  console.log(listsFromMasterKey);
   return lists;
 }
 

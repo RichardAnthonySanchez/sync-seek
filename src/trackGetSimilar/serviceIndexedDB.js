@@ -90,6 +90,29 @@ export const indexedDBService = (function () {
         };
       });
     },
+    getSimilarTracksFromMasterKey: function () {
+      const masterKey = this.getMasterKeys();
+      console.log("the masterkey format is");
+      console.log(`the master key is ${JSON.stringify(masterKey)}`);
+      // loop through each key value and make a get request to the DB
+
+      return new Promise((resolve, reject) => {
+        const transaction = db.trasaction("tracks", "readonly");
+        const store = transaction.objectStore("tracks");
+        let request;
+        for (track in masterKey) {
+          request = store.get(key);
+
+          request.onsuccess = function () {
+            console.log(`succeeded in finding ${key} in the master key`);
+          };
+
+          request.onerror = function () {
+            console.error("could not find key using the master key");
+          };
+        }
+      });
+    },
     getMasterKeys: function () {
       return new Promise((resolve, reject) => {
         // im unfamiliar with this pattern. lets figure this out
@@ -98,7 +121,6 @@ export const indexedDBService = (function () {
         const request = store.getAll();
 
         request.onsuccess = function () {
-          console.log("testing in the store");
           const allKeys = request.result; // Get the result from the request
           resolve(allKeys); // Resolve the promise with the result
         };
