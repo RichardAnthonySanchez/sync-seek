@@ -28,8 +28,8 @@ export function interfaceCreateTrackInput() {
 
 export async function getStoredSimilarTrackListsInterface() {
   const lists = await indexedDBService.getAllSimilarTracksList();
-  const listsFromMasterKey = indexedDBService.getSimilarTracksFromMasterKey();
-  console.log(listsFromMasterKey);
+  //const listsFromMasterKey = await indexedDBService.getSimilarTracksFromMasterKey();
+  //console.log(listsFromMasterKey);
   return lists;
 }
 
@@ -89,4 +89,8 @@ export function getMasterKeysFromDBInterface() {
   return masterKey;
   // this will be used instead of the get all track method.
   // each item in the masterkey objectStore will be a query to find data in the tracks objectStore
+}
+
+export function clearAllTracksInterface() {
+  indexedDBService.clearAllTracks();
 }

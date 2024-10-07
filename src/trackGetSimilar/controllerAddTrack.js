@@ -6,6 +6,7 @@ import {
   deleteMasterKeysInterface,
   extendSimilarTracksInterface,
   saveMasterKeysFromDBInterface,
+  clearAllTracksInterface,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
@@ -33,8 +34,7 @@ function controllerAddTrack() {
     } else if (event.target.id === "extend-similar-tracks") {
       extendSimilarTracksInterface();
     } else if (event.target.id === "delete-artists") {
-      localStorage.clear();
-      console.log("successfully cleared local storage to make some space...");
+      clearAllTracksInterface();
     }
   });
 }

@@ -89,15 +89,15 @@ export const indexedDBService = (function () {
           reject(request.error);
         };
       });
-    },
+    } /*
     getSimilarTracksFromMasterKey: function () {
       const masterKey = this.getMasterKeys();
       console.log("the masterkey format is");
-      console.log(`the master key is ${JSON.stringify(masterKey)}`);
+      console.log(`the master key is ${JSON.stringify(masterKey)}`); //returning an empty obj. why?
+      
       // loop through each key value and make a get request to the DB
-
       return new Promise((resolve, reject) => {
-        const transaction = db.trasaction("tracks", "readonly");
+        const transaction = db.transaction("tracks", "readonly");
         const store = transaction.objectStore("tracks");
         let request;
         for (track in masterKey) {
@@ -112,7 +112,7 @@ export const indexedDBService = (function () {
           };
         }
       });
-    },
+    },*/,
     getMasterKeys: function () {
       return new Promise((resolve, reject) => {
         // im unfamiliar with this pattern. lets figure this out
@@ -129,6 +129,20 @@ export const indexedDBService = (function () {
           reject(request.error);
         };
       });
+    },
+    clearAllTracks: function () {
+      const transaction = db.transaction("tracks", "readwrite");
+      const store = transaction.objectStore("tracks");
+
+      const request = store.clear();
+
+      request.onsuccess = function () {
+        console.log("all tracks have been successfully deleted");
+      };
+
+      request.onerror = function () {
+        console.error("error occured while deleting tracks:", request.error);
+      };
     },
   };
 })();
