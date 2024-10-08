@@ -8,6 +8,7 @@ import {
 } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
 import { indexedDBService } from "./serviceIndexedDB";
+import exportToExcel from "./exportToExcel";
 
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
@@ -95,4 +96,9 @@ export function getMasterKeysFromDBInterface() {
 
 export function clearAllTracksInterface() {
   indexedDBService.clearAllTracks();
+}
+
+export async function exportToExcelInterface() {
+  const data = await getStoredSimilarTrackListsInterface();
+  exportToExcel(data);
 }

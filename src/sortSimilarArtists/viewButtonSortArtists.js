@@ -1,6 +1,6 @@
 export default function viewButtonSortArtists() {
   const button = document.createElement("button");
-  button.id = "sort-artists";
-  button.innerHTML = "sort artists";
+  button.id = "export-tracks";
+  button.innerHTML = "export list";
   document.body.appendChild(button);
 }

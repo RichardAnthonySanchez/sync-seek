@@ -7,6 +7,7 @@ import {
   extendSimilarTracksInterface,
   saveMasterKeysFromDBInterface,
   clearAllTracksInterface,
+  exportToExcelInterface,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
@@ -35,6 +36,8 @@ function controllerAddTrack() {
       extendSimilarTracksInterface();
     } else if (event.target.id === "delete-artists") {
       clearAllTracksInterface();
+    } else if (event.target.id === "export-tracks") {
+      await exportToExcelInterface();
     }
   });
 }
