@@ -53,6 +53,44 @@ export const indexedDBService = (function () {
         console.error("Database error saving track:", request.error);
       };
     },
+    updateTrackCount: function (artistName, trackName, count) {
+      // Open a transaction on the "tracks" object store with readwrite access
+      const transaction = db.transaction("tracks", "readwrite");
+      const store = transaction.objectStore("tracks");
+
+      // Retrieve the track by trackName (assuming trackName is the key)
+      const request = store.get(trackName);
+
+      request.onsuccess = function (event) {
+        const track = event.target.result;
+
+        // Validate that the track exists and the artistName matches
+        if (track && track.artistName === artistName) {
+          // If the count property doesn't exist, create it
+          if (!track.count) {
+            track.count = 0;
+          }
+
+          // Update the count value
+          track.count = count;
+
+          // Use put() to update the object in the object store
+          store.put(track);
+
+          console.log(
+            `Track count updated for "${trackName}" by ${artistName}`
+          );
+        } else {
+          console.warn(
+            `Track "${trackName}" by ${artistName} not found or artist does not match.`
+          );
+        }
+      };
+
+      request.onerror = function (event) {
+        console.error("Failed to retrieve track:", event);
+      };
+    },
     saveMasterKeys: function (key) {
       const transaction = db.transaction("masterKeys", "readwrite");
       const store = transaction.objectStore("masterKeys");
