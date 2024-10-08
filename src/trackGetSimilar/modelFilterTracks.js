@@ -4,34 +4,59 @@ const modelFilterTracks = (function () {
       const trackCount = {};
       const matchingTracks = [];
 
-      lists.map((list) =>
+      lists.map((list) => {
+        // Safeguard: Check if 'track' exists and is an array before mapping over it
+        if (
+          !list.similartracks ||
+          !list.similartracks.track ||
+          !Array.isArray(list.similartracks.track)
+        ) {
+          console.warn(
+            "Skipping list due to missing or invalid 'track' data:",
+            list
+          );
+          return; // Skip to the next list if 'track' is missing or not an array
+        }
+
         list.similartracks.track.map((track) => {
-          // we dont have a way of handling tracks if one doesnt have expected values
-          // is there a way to skip a track if it is being problematic?
+          // Ensure the track object contains both 'name' and 'artist.name'
+          if (!track.name || !track.artist || !track.artist.name) {
+            console.warn(
+              "Skipping track due to missing name or artist:",
+              track
+            );
+            return; // Skip to the next track if required fields are missing
+          }
+
           const trackName = track.name;
           const artistName = track.artist.name;
-          if (!trackCount[track.name]) {
+
+          // Initialize track count and artist if it's the first time we see this track
+          if (!trackCount[trackName]) {
             trackCount[trackName] = { count: 0, artist: artistName };
           }
-          trackCount[trackName].count++;
-        })
-      );
 
+          // Increment the track count
+          trackCount[trackName].count++;
+        });
+      });
+
+      // Collect tracks that appear more than once
       for (const trackName in trackCount) {
         if (trackCount[trackName].count > 1) {
           matchingTracks.push({
             track: trackName,
             artist: trackCount[trackName].artist,
+            count: trackCount[trackName].count, // Include track count for sorting or additional analysis
           });
         }
       }
 
       console.log(
-        "this is your list of matching tracks: " +
-          JSON.stringify(matchingTracks)
+        "This is your list of matching tracks: " +
+          JSON.stringify(matchingTracks, null, 2)
       );
-      // console.log the matchingTracks length. this way, when we recursively fetch for more tracks, we should see the list length increase. this may be useful for testing
-      return matchingTracks; // can we feed all matching tracks back into the fetch request to extend the list indefinately?
+      return matchingTracks;
     },
   };
 })();
