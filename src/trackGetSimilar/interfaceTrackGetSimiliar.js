@@ -41,6 +41,41 @@ export async function getAlikeTracksInterface() {
   return alikeTracks;
 }
 
+export async function storeTracksFromList(list) {
+  // Ensure that the input `list` is an array before proceeding
+  if (!Array.isArray(list)) {
+    console.error("Expected an array, but received:", list);
+    return; // Exit the function if `list` is not an array
+  }
+
+  const alikeTracks = list;
+
+  for (const track of alikeTracks) {
+    try {
+      // Ensure track has the necessary properties (artist, track) before proceeding
+      if (!track.artist || !track.track) {
+        console.warn("Track data is incomplete, skipping:", track);
+        continue; // Skip to the next track if required data is missing
+      }
+
+      // Fetch a new list of similar tracks for each track
+      let newList = await fetchTrackGetSimilar(track.artist, track.track);
+
+      // Store the new track and list
+      await storeSimilarTracksList(track.artist, track.track, newList);
+
+      // Update track count in the indexedDB
+      await indexedDBService.updateTrackCount(
+        track.artist,
+        track.track,
+        track.count
+      );
+    } catch (error) {
+      console.error("Error processing track:", track, error);
+    }
+  }
+}
+
 export function deleteMasterKeysInterface() {
   deleteMasterKeysLocally();
 }
@@ -51,11 +86,8 @@ export async function extendSimilarTracksInterface() {
   const alikeTracks = await getAlikeTracksInterface();
 
   for (const track of alikeTracks) {
-    // forEach method doens't work with promises (async/await functions)
-    // Stop storing if we've already reached 50 similar tracks. This will be delted when we aren't using local storage
-
-    if (storedCount >= 1000) {
-      // local storage has limits, so we prevent holding over 45 lists at a time
+    if (storedCount >= 200) {
+      // this isn't 200 fetches as expected. this is 200 inputs into the repeat fetch request.
       console.log(`Reached storage limit of  ${storedCount} tracks.`);
       break;
     }
@@ -67,7 +99,7 @@ export async function extendSimilarTracksInterface() {
       );
 
       // Store each list and increment the stored count. stored count will be removed when we are no longer using local storage
-      storeSimilarTracksList(track.artist, track.track, fetchedEachTracksList);
+      storeSimilarTracksList(track.artist, track.track, fetchedEachTracksList); // might add a count param to this. so we can add it as a prop to each item in the track objectStore
       storedCount++;
     } catch (error) {
       console.error("Error fetching or storing track:", track, error);
@@ -75,7 +107,8 @@ export async function extendSimilarTracksInterface() {
   }
 
   // Filter the lists to return only tracks that have a match
-  getAlikeTracksInterface();
+  const list = getAlikeTracksInterface();
+  storeTracksFromList(list); // this is most likely causing an infinite loop
 }
 
 export function initializeIndexedDB() {
