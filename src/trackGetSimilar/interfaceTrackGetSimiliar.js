@@ -28,20 +28,25 @@ export function interfaceCreateTrackInput() {
 }
 
 export async function getStoredSimilarTrackListsInterface() {
-  const lists = await indexedDBService.getAllSimilarTracksList();
-  //const listsFromMasterKey = await indexedDBService.getSimilarTracksFromMasterKey();
-  //console.log(listsFromMasterKey);
-  return lists;
+  const { similarTracksList } =
+    await indexedDBService.getAllSimilarTracksList();
+  return similarTracksList;
+}
+
+export async function getAllSimilarTrackObjectsInterface() {
+  const { allTracks } = await indexedDBService.getAllSimilarTracksList();
+  return allTracks;
 }
 
 export async function getAlikeTracksInterface() {
   const lists = await getStoredSimilarTrackListsInterface();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   console.log(`${alikeTracks.length} a like tracks found`);
-  return alikeTracks;
+  return alikeTracks; // count prop is working here. if its getting lost, its getting lost somewhere else
 }
 
 export async function storeTracksFromList(list) {
+  //this only triggers from the list thats input. this doesn't update props to resulting bigger list
   // Ensure that the input `list` is an array before proceeding
   if (!Array.isArray(list)) {
     console.error("Expected an array, but received:", list);
@@ -63,16 +68,19 @@ export async function storeTracksFromList(list) {
 
       // Store the new track and list
       await storeSimilarTracksList(track.artist, track.track, newList);
-
-      // Update track count in the indexedDB
-      await indexedDBService.updateTrackCount(
-        track.artist,
-        track.track,
-        track.count
-      );
     } catch (error) {
       console.error("Error processing track:", track, error);
     }
+
+    // Update track count in the indexedDB
+    console.log(
+      `your track likeness count for ${track.track} is ${track.count}`
+    );
+    await indexedDBService.updateTrackCount(
+      track.artist,
+      track.track,
+      track.count
+    );
   }
 }
 
@@ -81,6 +89,7 @@ export function deleteMasterKeysInterface() {
 }
 
 export async function extendSimilarTracksInterface() {
+  // BUG: infinite loop somewhere in here
   let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
 
   const alikeTracks = await getAlikeTracksInterface();
@@ -107,8 +116,15 @@ export async function extendSimilarTracksInterface() {
   }
 
   // Filter the lists to return only tracks that have a match
-  const list = getAlikeTracksInterface();
-  storeTracksFromList(list); // this is most likely causing an infinite loop
+  const list = await getAlikeTracksInterface();
+
+  for (const track of list) {
+    await indexedDBService.updateTrackCount(
+      track.artist,
+      track.track,
+      track.count
+    );
+  }
 }
 
 export function initializeIndexedDB() {
@@ -132,6 +148,6 @@ export function clearAllTracksInterface() {
 }
 
 export async function exportToExcelInterface() {
-  const data = await getStoredSimilarTrackListsInterface();
+  const data = await getAllSimilarTrackObjectsInterface();
   exportToExcel(data);
 }
