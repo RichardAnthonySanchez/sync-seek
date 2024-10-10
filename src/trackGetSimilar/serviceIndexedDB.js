@@ -53,12 +53,12 @@ export const indexedDBService = (function () {
         console.error("Database error saving track:", request.error);
       };
     },
-    updateTrackCount: function (artistName, trackName, count) {
+    updateProperty: function (artistName, trackName, updatedProps) {
       // Open a transaction on the "tracks" object store with readwrite access
       const transaction = db.transaction("tracks", "readwrite");
       const store = transaction.objectStore("tracks");
 
-      // Retrieve the track by trackName (assuming trackName is the key)
+      // Retrieve the track by trackName
       const request = store.get(trackName);
 
       request.onsuccess = function (event) {
@@ -66,19 +66,18 @@ export const indexedDBService = (function () {
 
         // Validate that the track exists and the artistName matches
         if (track && track.artistName === artistName) {
-          // If the count property doesn't exist, create it
-          if (!track.count) {
-            track.count = 0;
+          // Loop through the updatedProps object and update each property
+          for (const [propName, newValue] of Object.entries(updatedProps)) {
+            track[propName] = newValue; // Set or update the property
           }
-
-          // Update the count value
-          track.count = count;
 
           // Use put() to update the object in the object store
           store.put(track);
 
           console.log(
-            `Track count updated for "${trackName}" by ${artistName}`
+            `Track properties updated for "${trackName}" by ${artistName}: ${JSON.stringify(
+              updatedProps
+            )}`
           );
         } else {
           console.warn(
@@ -117,9 +116,9 @@ export const indexedDBService = (function () {
             const similarTracksList = allTracks.map(
               (track) => track.similarTracks
             );
-            resolve(similarTracksList);
+            resolve({ similarTracksList, allTracks });
           } else {
-            resolve([]);
+            resolve({ similarTracksList: [], allTracks: [] });
           }
         };
 
