@@ -8,6 +8,7 @@ import {
   saveMasterKeysFromDBInterface,
   clearAllTracksInterface,
   exportToExcelInterface,
+  storeTracksFromList,
 } from "./interfaceTrackGetSimiliar";
 
 function controllerAddTrack() {
@@ -28,7 +29,8 @@ function controllerAddTrack() {
         );
         await storeSimilarTracksList(artistName, songName, eachTracksList);
         await saveMasterKeysFromDBInterface(songName);
-        await getAlikeTracksInterface(); // this triggers for each track sent by the form. perhaps we can put this somewhere else, so it only triggers the cohort
+        const alikeTracks = await getAlikeTracksInterface(); // this triggers for each track sent by the form. perhaps we can put this somewhere else, so it only triggers the cohort
+        await storeTracksFromList(alikeTracks);
       });
     } else if (event.target.id === "add-track") {
       interfaceCreateTrackInput();
