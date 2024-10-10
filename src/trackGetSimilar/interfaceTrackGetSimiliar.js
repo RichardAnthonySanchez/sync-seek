@@ -42,7 +42,7 @@ export async function getAlikeTracksInterface() {
   const lists = await getStoredSimilarTrackListsInterface();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   console.log(`${alikeTracks.length} a like tracks found`);
-  return alikeTracks; // count prop is working here. if its getting lost, its getting lost somewhere else
+  return alikeTracks;
 }
 
 export async function storeTracksFromList(list) {
@@ -73,13 +73,17 @@ export async function storeTracksFromList(list) {
     }
 
     // Update track count in the indexedDB
-    console.log(
-      `your track likeness count for ${track.track} is ${track.count}`
-    );
-    await indexedDBService.updateTrackCount(
+    await indexedDBService.updateProperty(
+      // can we send more than the track count here. example, urls, images, plays etc
+      // BUG: we are getting warnings for not having having tracks in db or doesnt have matching track and artist values. why? most dont have track name dupes. what else could be the problem?
       track.artist,
       track.track,
-      track.count
+      {
+        count: track.count,
+        playCount: track.playCount,
+        trackUrl: track.trackUrl,
+        imageUrl: track.imageUrl,
+      }
     );
   }
 }
