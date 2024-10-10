@@ -30,10 +30,19 @@ const modelFilterTracks = (function () {
 
           const trackName = track.name;
           const artistName = track.artist.name;
+          const playCount = track.playcount;
+          const trackUrl = track.url;
+          const imageUrl = track.image[4]["#text"];
 
           // Initialize track count and artist if it's the first time we see this track
           if (!trackCount[trackName]) {
-            trackCount[trackName] = { count: 0, artist: artistName };
+            trackCount[trackName] = {
+              count: 0,
+              artist: artistName,
+              playCount: playCount,
+              trackUrl: trackUrl,
+              imageUrl: imageUrl,
+            };
           }
 
           // Increment the track count
@@ -41,13 +50,16 @@ const modelFilterTracks = (function () {
         });
       });
 
-      // Collect tracks that appear more than once
+      // Collect tracks that appear more than once in the matching tracks array
       for (const trackName in trackCount) {
         if (trackCount[trackName].count > 1) {
           matchingTracks.push({
             track: trackName,
             artist: trackCount[trackName].artist,
-            count: trackCount[trackName].count, // Include track count for sorting or additional analysis
+            count: trackCount[trackName].count,
+            playCount: trackCount[trackName].playCount,
+            trackUrl: trackCount[trackName].trackUrl,
+            imageUrl: trackCount[trackName].imageUrl,
           });
         }
       }
