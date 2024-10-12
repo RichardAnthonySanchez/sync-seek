@@ -123,10 +123,16 @@ export async function extendSimilarTracksInterface() {
   const list = await getAlikeTracksInterface();
 
   for (const track of list) {
-    await indexedDBService.updateTrackCount(
+    await indexedDBService.updateProperty(
+      // update this to update track params not just the track count (that method no longer exists)
       track.artist,
       track.track,
-      track.count
+      {
+        count: track.count,
+        playCount: track.playCount,
+        trackUrl: track.trackUrl,
+        imageUrl: track.imageUrl,
+      }
     );
   }
 }
