@@ -10,6 +10,14 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import { indexedDBService } from "./serviceIndexedDB";
 import exportToExcel from "./exportToExcel";
 
+//to-do list
+//create an attribute for user submitted tracks vs fetched tracks
+//create a query hopper that empties upon submission
+// modify so we can't submit the same tracks multiple times
+// console log what is in the hopper upon submission and log the length after fetch
+//modify max fetches to 500 while testing
+//verify we are actually returning similar tracks
+
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
     "Your artist name is: " + artist + " and your song name is: " + song
@@ -123,17 +131,12 @@ export async function extendSimilarTracksInterface() {
   const list = await getAlikeTracksInterface();
 
   for (const track of list) {
-    await indexedDBService.updateProperty(
-      // update this to update track params not just the track count (that method no longer exists)
-      track.artist,
-      track.track,
-      {
-        count: track.count,
-        playCount: track.playCount,
-        trackUrl: track.trackUrl,
-        imageUrl: track.imageUrl,
-      }
-    );
+    await indexedDBService.updateProperty(track.artist, track.track, {
+      count: track.count,
+      playCount: track.playCount,
+      trackUrl: track.trackUrl,
+      imageUrl: track.imageUrl,
+    });
   }
 }
 
