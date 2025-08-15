@@ -18,6 +18,12 @@ import exportToExcel from "./exportToExcel";
 //modify max fetches to 500 while testing
 //verify we are actually returning similar tracks
 
+export async function checkForDupes(songList, artistList) {
+  const libraryTracks = await getAllSimilarTrackObjectsInterface();
+
+  console.log(JSON.stringify(songList));
+}
+
 export async function interfaceTrackGetSimilar(artist, song) {
   console.log(
     "Your artist name is: " + artist + " and your song name is: " + song
