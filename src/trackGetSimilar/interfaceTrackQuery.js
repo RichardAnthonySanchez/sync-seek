@@ -3,9 +3,20 @@ export function interfaceCreateQueryObject(songName, artistName) {
 }
 
 let tracksQuery = [];
-export function interfaceQueueTrackInQuery(queryObject) {
-  // put each track object in the query
-  tracksQuery.push(queryObject);
+
+function isDuplicate(trackA, trackB) {
+  return JSON.stringify(trackA) === JSON.stringify(trackB);
 }
 
-// lets check for duplicates in the query before we proceed.
+export function interfaceQueueTrackInQuery(queryObject) {
+  //check dupes before pushing
+  if (!tracksQuery.some((item) => isDuplicate(item, queryObject))) {
+    // push each query to the queue
+    tracksQuery.push(queryObject);
+    // log the total queue arr after each push
+    // comment this out during production
+    console.log(
+      `Here is the queue of tracks that are being submitted ${tracksQuery}`
+    );
+  }
+}
