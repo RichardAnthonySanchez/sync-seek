@@ -5,6 +5,7 @@ export function interfaceCreateQueryObject(songName, artistName) {
 let tracksQuery = [];
 
 function isDuplicate(trackA, trackB) {
+  // checking for dupes might be better later in the pipeline. what if the user creates multiple instances of queries by clicking submission again?
   return JSON.stringify(trackA) === JSON.stringify(trackB);
 }
 
