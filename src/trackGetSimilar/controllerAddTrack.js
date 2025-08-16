@@ -15,7 +15,10 @@ import {
 import {
   interfaceCreateQueryObject,
   interfaceQueueTrackInQuery,
+  getTracksQueue,
 } from "./interfaceTrackQuery";
+
+import { compareQueueToDB } from "./interfaceFilterPreFetch";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -37,6 +40,10 @@ function controllerAddTrack() {
         let trackQueryObject = interfaceCreateQueryObject(songName, artistName);
         interfaceQueueTrackInQuery(trackQueryObject);
       });
+
+      let queue = getTracksQueue();
+      // send the entire queue of tracks to the dedupe filter before fetching more tracks
+      compareQueueToDB(queue);
 
       /*
       // old coupled conditional for fetching data for each song submission and proccessing it

@@ -20,3 +20,7 @@ export function interfaceQueueTrackInQuery(queryObject) {
     );
   }
 }
+
+export function getTracksQueue() {
+  return tracksQuery;
+}
