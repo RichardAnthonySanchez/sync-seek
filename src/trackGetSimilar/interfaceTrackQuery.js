@@ -17,9 +17,13 @@ export function interfaceQueueTrackInQuery(queryObject) {
     tracksQuery.push(queryObject);
     // log the total queue arr after each push
     // comment this out during production
+    /*
     console.log(
-      `Here is the queue of tracks that are being submitted ${tracksQuery}`
+      `Here is the queue of tracks that are being submitted ${JSON.stringify(
+        tracksQuery
+      )}`
     );
+    */
   }
 }
 
