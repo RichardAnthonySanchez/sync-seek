@@ -1,6 +1,5 @@
-import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
-
-export async function compareQueueToDB(queue) {
+export function compareQueueToDB(queue) {
+  let filteredQueue = [];
   let normalizedQueue = normalizeQueueData(queue);
   let deduplicatedQueue = deduplicateQueue(normalizedQueue);
   console.log(deduplicatedQueue);
@@ -12,12 +11,13 @@ export async function compareQueueToDB(queue) {
     // we can change the key here to a ${q.songName}|${q.artistName} pattern. Helps with tracks with the same name;
     if (!existingSongsSet.has(key)) {
       console.log("Adding", key);
-      // fetch the track using the q object
-      await fetchTrackGetSimilar(q.artistName, q.songName); // change this to the fetching interface instead of fetching directly
+      filteredQueue.push({ artistName: q.artistName, songName: q.songName });
     } else {
       console.log(`skipping ${key} because it already exists`);
     }
   }
+  //console.log(filteredQueue);
+  return filteredQueue;
 }
 
 function getExistingSongsSet(db) {
@@ -28,6 +28,7 @@ function getExistingSongsSet(db) {
   return existingSongs;
 }
 const fakeDB = [
+  // get our real DB and delete this.
   {
     track: "Rip Van Winkle",
     artist: "Shannon and the Clams",

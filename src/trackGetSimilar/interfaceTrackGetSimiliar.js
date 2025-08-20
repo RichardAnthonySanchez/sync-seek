@@ -18,10 +18,18 @@ import exportToExcel from "./exportToExcel";
 //modify max fetches to 500 while testing
 //verify we are actually returning similar tracks
 
-export async function checkForDupes(songList, artistList) {
-  const libraryTracks = await getAllSimilarTrackObjectsInterface();
+export function fetchFromFilteredQueue(queue) {
+  console.log(queue);
+  queue.forEach(async (input) => {
+    const songName = input.songName;
+    const artistName = input.artistName;
+    const eachTracksList = await interfaceTrackGetSimilar(artistName, songName);
 
-  console.log(JSON.stringify(songList));
+    await storeSimilarTracksList(artistName, songName, eachTracksList); // we should store the entire object from last fm not just these values
+    await saveMasterKeysFromDBInterface(songName);
+    const alikeTracks = await getAlikeTracksInterface();
+    await storeTracksFromList(alikeTracks);
+  });
 }
 
 export async function interfaceTrackGetSimilar(artist, song) {
