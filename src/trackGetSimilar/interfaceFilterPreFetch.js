@@ -1,33 +1,30 @@
-export function compareQueueToDB(queue) {
+import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
+
+export async function compareQueueToDB(queue) {
   let normalizedQueue = normalizeQueueData(queue);
   let deduplicatedQueue = deduplicateQueue(normalizedQueue);
   console.log(deduplicatedQueue);
-  let existingSongsSet = getExistingSongsSet(fakeDB); // Make a look up table for the tracks in the database
+  let existingSongsSet = getExistingSongsSet(fakeDB); // Make a look up table for the tracks in the database. We will need to await the DB after testing.
   for (const q of deduplicatedQueue) {
     // Check query tracks against tracks already in the database
     console.log(JSON.stringify(q));
-    const key = `${q.songName}|${q.artistName}`;
+    const key = `${q.songName}`;
+    // we can change the key here to a ${q.songName}|${q.artistName} pattern. Helps with tracks with the same name;
     if (!existingSongsSet.has(key)) {
       console.log("Adding", key);
-      // to do:
       // fetch the track using the q object
-      // do we have to add the newly fetched song to the set?
+      await fetchTrackGetSimilar(q.artistName, q.songName); // change this to the fetching interface instead of fetching directly
     } else {
       console.log(`skipping ${key} because it already exists`);
     }
   }
 }
-// to do:
-//check for matches in the database compared to tracks in the queue
-// if there are matches, create a new queue with only the unique tracks
-// start fetching the unique tracks to the last fm api
 
 function getExistingSongsSet(db) {
   // hash table for fast loop up
-  // filter database on (song|title)
-  const existingSongs = new Set(
-    db.map((song) => `${song.track}|${song.artist}`)
-  );
+  // filter database on song or (song|title)
+  const existingSongs = new Set(db.map((song) => normalizeString(song.track)));
+  //  we can use a key pattern like ${song.track}|${song.artist} after testing with just the track name
   return existingSongs;
 }
 const fakeDB = [
