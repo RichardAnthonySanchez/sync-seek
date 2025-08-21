@@ -1,9 +1,14 @@
-export function compareQueueToDB(queue) {
+import { interfaceGetAllFromDatabase } from "./interfaceTrackGetSimiliar";
+
+export async function compareQueueToDB(queue) {
   let filteredQueue = [];
   let normalizedQueue = normalizeQueueData(queue);
   let deduplicatedQueue = deduplicateQueue(normalizedQueue);
   console.log(deduplicatedQueue);
-  let existingSongsSet = getExistingSongsSet(fakeDB); // Make a look up table for the tracks in the database. We will need to await the DB after testing.
+
+  const allTracks = await interfaceGetAllFromDatabase();
+  console.log(allTracks);
+  let existingSongsSet = getExistingSongsSet(allTracks); // Make a look up table for the tracks in the database. We will need to await the DB after testing.
   for (const q of deduplicatedQueue) {
     // Check query tracks against tracks already in the database
     console.log(JSON.stringify(q));
@@ -16,6 +21,7 @@ export function compareQueueToDB(queue) {
       console.log(`skipping ${key} because it already exists`);
     }
   }
+
   //console.log(filteredQueue);
   return filteredQueue;
 }
@@ -27,6 +33,7 @@ function getExistingSongsSet(db) {
   //  we can use a key pattern like ${song.track}|${song.artist} after testing with just the track name
   return existingSongs;
 }
+/*
 const fakeDB = [
   // get our real DB and delete this.
   {
@@ -58,6 +65,7 @@ const fakeDB = [
       "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
   },
 ];
+*/
 
 function isDuplicate(trackA, trackB) {
   return JSON.stringify(trackA) === JSON.stringify(trackB);

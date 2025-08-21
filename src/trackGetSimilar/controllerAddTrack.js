@@ -39,7 +39,7 @@ function controllerAddTrack() {
 
       let queue = getTracksQueue();
       // send the entire queue of tracks to the dedupe filter before fetching more tracks
-      const filteredQueue = compareQueueToDB(queue);
+      const filteredQueue = await compareQueueToDB(queue);
       //console.log(filteredQueue);
       fetchFromFilteredQueue(filteredQueue);
     } else if (event.target.id === "add-track") {

@@ -104,6 +104,23 @@ export const indexedDBService = (function () {
         console.error("Database error saving key:", request.error);
       };
     },
+    getAllFromDatabase: function () {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction("tracks", "readonly");
+        const store = transaction.objectStore("tracks");
+        const request = store.getAll();
+
+        request.onsuccess = function (event) {
+          const allTracks = event.target.result;
+          resolve(allTracks);
+          return allTracks;
+        };
+        request.onerror = function () {
+          reject(request.error);
+        };
+      });
+    },
+
     getAllSimilarTracksList: function () {
       return new Promise((resolve, reject) => {
         const transaction = db.transaction("tracks", "readonly");

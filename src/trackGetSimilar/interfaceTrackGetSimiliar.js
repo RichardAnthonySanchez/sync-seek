@@ -18,8 +18,8 @@ import exportToExcel from "./exportToExcel";
 //modify max fetches to 500 while testing
 //verify we are actually returning similar tracks
 
-export function fetchFromFilteredQueue(queue) {
-  console.log(queue);
+export async function fetchFromFilteredQueue(queue) {
+  // create conditionals for an empty queue or unexpected variables
   queue.forEach(async (input) => {
     const songName = input.songName;
     const artistName = input.artistName;
@@ -121,6 +121,7 @@ export async function extendSimilarTracksInterface() {
   const alikeTracks = await getAlikeTracksInterface();
 
   for (const track of alikeTracks) {
+    // this is likely what's taking so long. This is fetching a long list of tracks. One that is often continuing to find new tracks.
     if (storedCount >= 200) {
       // this isn't 200 fetches as expected. this is 200 inputs into the repeat fetch request.
       console.log(`Reached storage limit of  ${storedCount} tracks.`);
@@ -156,6 +157,11 @@ export async function extendSimilarTracksInterface() {
 
 export function initializeIndexedDB() {
   indexedDBService.intializeDB();
+}
+
+export function interfaceGetAllFromDatabase() {
+  const allTracks = indexedDBService.getAllFromDatabase();
+  return allTracks;
 }
 
 export function saveMasterKeysFromDBInterface(trackName) {
