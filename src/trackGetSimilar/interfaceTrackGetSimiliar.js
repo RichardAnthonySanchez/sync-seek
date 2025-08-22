@@ -13,11 +13,9 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
-// create a button for what's in the database already
 // create a stop fetching button
 // create a button for comparing two tracks (without typing it manually)
 // create a toggle between songs in the db and one for which tracks a similar
-// create a button to show what's in the hopper/query queue
 //create an attribute for user submitted tracks vs fetched tracks
 // console log what is in the hopper upon submission and log the length after fetch
 //modify max fetches to 500 while testing

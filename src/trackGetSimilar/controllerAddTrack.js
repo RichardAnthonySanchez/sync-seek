@@ -17,7 +17,10 @@ import {
   getTracksQueue,
 } from "./interfaceTrackQuery";
 
-import { compareQueueToDB } from "./interfaceFilterPreFetch";
+import {
+  compareQueueToDB,
+  interfaceFilteredQueue,
+} from "./interfaceFilterPreFetch";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -51,6 +54,8 @@ function controllerAddTrack() {
       await exportToExcelInterface();
     } else if (event.target.id === "view-tracks-in-database") {
       await interfaceViewTracksFromDatabase();
+    } else if (event.target.id === "view-queue") {
+      await interfaceFilteredQueue.viewFilteredQueue();
     }
   });
 }

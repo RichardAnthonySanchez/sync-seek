@@ -1,7 +1,25 @@
+import { filter } from "lodash";
 import { interfaceGetAllFromDatabase } from "./interfaceTracksLibraryDatabase";
 
-export async function compareQueueToDB(queue) {
+export const interfaceFilteredQueue = (function () {
   let filteredQueue = [];
+  return {
+    getFilteredQueue: function () {
+      return filteredQueue;
+    },
+    updateFilteredQueue: function (trackObj) {
+      filteredQueue.push(trackObj);
+    },
+    clearFilteredQueue: function () {
+      filteredQueue = [];
+    },
+    viewFilteredQueue: function () {
+      console.log(filteredQueue);
+    },
+  };
+})();
+
+export async function compareQueueToDB(queue) {
   let normalizedQueue = normalizeQueueData(queue);
   let deduplicatedQueue = deduplicateQueue(normalizedQueue);
   console.log(deduplicatedQueue);
@@ -16,12 +34,15 @@ export async function compareQueueToDB(queue) {
     // we can change the key here to a ${q.songName}|${q.artistName} pattern. Helps with tracks with the same name;
     if (!existingSongsSet.has(key)) {
       console.log("Adding", key);
-      filteredQueue.push({ artistName: q.artistName, songName: q.songName });
+      interfaceFilteredQueue.updateFilteredQueue({
+        artistName: q.artistName,
+        songName: q.songName,
+      });
     } else {
       console.log(`skipping ${key} because it already exists`);
     }
   }
-
+  let filteredQueue = interfaceFilteredQueue.getFilteredQueue();
   //console.log(filteredQueue);
   return filteredQueue;
 }

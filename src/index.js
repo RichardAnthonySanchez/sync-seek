@@ -6,6 +6,7 @@ import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
 import { initializeIndexedDB } from "./trackGetSimilar/interfaceTracksLibraryDatabase";
 import ViewTracksInDatabase from "./trackGetSimilar/viewTracksInDatabase";
+import ViewQueue from "./trackGetSimilar/viewQueue";
 
 function component() {
   createTrackGetSimilarForm();
@@ -17,6 +18,7 @@ function component() {
   ViewExtendSimilarTracksButton();
   ViewTracksInDatabase();
   initializeIndexedDB();
+  ViewQueue();
 }
 
 document.body.appendChild(component());
