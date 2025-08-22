@@ -1,4 +1,4 @@
-import { interfaceGetAllFromDatabase } from "./interfaceTrackGetSimiliar";
+import { interfaceGetAllFromDatabase } from "./interfaceTracksLibraryDatabase";
 
 export async function compareQueueToDB(queue) {
   let filteredQueue = [];
@@ -7,7 +7,7 @@ export async function compareQueueToDB(queue) {
   console.log(deduplicatedQueue);
 
   const allTracks = await interfaceGetAllFromDatabase();
-  console.log(allTracks);
+  console.log(allTracks); // returns empty array if nothing is in library
   let existingSongsSet = getExistingSongsSet(allTracks); // Make a look up table for the tracks in the database. We will need to await the DB after testing.
   for (const q of deduplicatedQueue) {
     // Check query tracks against tracks already in the database
@@ -83,15 +83,20 @@ function deduplicateQueue(queue) {
 }
 
 function normalizeQueueData(queue) {
-  let normalizedQueue = queue.map((item) => {
-    let normalizedSongName = normalizeString(item.songName);
-    let normalizedArtistName = normalizeString(item.artistName);
-    return {
-      songName: normalizedSongName,
-      artistName: normalizedArtistName,
-    };
-  });
-  return normalizedQueue;
+  let normalizedQueue = queue
+    .filter((item) => {
+      return item.songName.trim() !== "" && item.artistName.trim() !== "";
+    })
+    .map((item) => {
+      if (item.songName.trim() !== "" && item.artistName.trim() !== "") {
+        return {
+          songName: normalizeString(item.songName),
+          artistName: normalizeString(item.artistName),
+        };
+      }
+    });
+
+  return normalizedQueue.filter(Boolean); // Remove any undefined values
 }
 
 function normalizeString(str) {

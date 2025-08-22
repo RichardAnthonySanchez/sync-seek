@@ -4,7 +4,7 @@ import { createTrackGetSimilarForm } from "./trackGetSimilar/viewTrackGetSimilar
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
-import { initializeIndexedDB } from "./trackGetSimilar/interfaceTrackGetSimiliar";
+import { initializeIndexedDB } from "./trackGetSimilar/interfaceTracksLibraryDatabase";
 
 function component() {
   createTrackGetSimilarForm();
