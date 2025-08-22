@@ -29,7 +29,9 @@ export async function compareQueueToDB(queue) {
 function getExistingSongsSet(db) {
   // hash table for fast loop up
   // filter database on song or (song|title)
-  const existingSongs = new Set(db.map((song) => normalizeString(song.track)));
+  const existingSongs = new Set(
+    db.map((song) => normalizeString(song.trackName))
+  );
   //  we can use a key pattern like ${song.track}|${song.artist} after testing with just the track name
   return existingSongs;
 }

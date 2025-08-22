@@ -6,12 +6,18 @@ import {
   saveMasterKeysFromDBInterface,
 } from "./interfaceTracksLibraryDatabase";
 import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
+import { fetchTrackInfo } from "./fetchTrackGetSimilar";
 import modelFilterTracks from "./modelFilterTracks";
 import { deleteMasterKeysLocally } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
+// create a button for what's in the database already
+// create a one-time fetch to return all data from the API
+// create a stop fetching button
+// create a toggle between songs in the db and one for which tracks a similar
+// create a button to show what's in the hopper/query queue
 //create an attribute for user submitted tracks vs fetched tracks
 // console log what is in the hopper upon submission and log the length after fetch
 //modify max fetches to 500 while testing
@@ -22,12 +28,17 @@ export async function fetchFromFilteredQueue(queue) {
   queue.forEach(async (input) => {
     const songName = input.songName;
     const artistName = input.artistName;
+
+    const trackInfo = await fetchTrackInfo(artistName, songName);
+    console.log(trackInfo);
+    /*
     const eachTracksList = await interfaceTrackGetSimilar(artistName, songName);
 
     await storeSimilarTracksList(artistName, songName, eachTracksList); // we should store the entire object from last fm not just these values
     await saveMasterKeysFromDBInterface(songName);
     const alikeTracks = await getAlikeTracksInterface();
     await storeTracksFromList(alikeTracks);
+    */
   });
 }
 
@@ -36,6 +47,7 @@ export async function interfaceTrackGetSimilar(artist, song) {
     "Your artist name is: " + artist + " and your song name is: " + song
   );
   const similarTracks = await fetchTrackGetSimilar(artist, song);
+  console.log(similarTracks);
   return similarTracks;
 }
 
