@@ -8,6 +8,7 @@ import {
 import {
   extendSimilarTracksInterface,
   clearAllTracksInterface,
+  interfaceViewTracksFromDatabase,
 } from "./interfaceTracksLibraryDatabase";
 
 import {
@@ -48,6 +49,8 @@ function controllerAddTrack() {
       clearAllTracksInterface();
     } else if (event.target.id === "export-tracks") {
       await exportToExcelInterface();
+    } else if (event.target.id === "view-tracks-in-database") {
+      await interfaceViewTracksFromDatabase();
     }
   });
 }

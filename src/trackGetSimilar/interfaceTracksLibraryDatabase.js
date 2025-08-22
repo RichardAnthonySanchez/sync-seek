@@ -6,6 +6,11 @@ import { indexedDBService } from "./serviceIndexedDB";
 
 import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
 
+export async function interfaceViewTracksFromDatabase() {
+  const allTracks = await interfaceGetAllFromDatabase();
+  console.log(allTracks);
+}
+
 export async function getStoredSimilarTrackListsInterface() {
   const { similarTracksList } =
     await indexedDBService.getAllSimilarTracksList();

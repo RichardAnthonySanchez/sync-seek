@@ -14,8 +14,8 @@ import exportToExcel from "./exportToExcel";
 
 //to-do list
 // create a button for what's in the database already
-// create a one-time fetch to return all data from the API
 // create a stop fetching button
+// create a button for comparing two tracks (without typing it manually)
 // create a toggle between songs in the db and one for which tracks a similar
 // create a button to show what's in the hopper/query queue
 //create an attribute for user submitted tracks vs fetched tracks
@@ -44,7 +44,7 @@ export async function fetchFromFilteredQueue(queue) {
       playcount: playCount,
       url: trackUrl,
       image: imageUrl,
-      similarTracks: similarTracks,
+      similarTracks: similarTracks.similartracks.track,
     };
     console.log(trackInfoObject); //write some logic to save individual tracks to the database
     await storeSimilarTracksList(trackInfoObject);
