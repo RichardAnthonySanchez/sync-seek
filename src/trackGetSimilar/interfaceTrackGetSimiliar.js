@@ -26,30 +26,30 @@ import exportToExcel from "./exportToExcel";
 export async function fetchFromFilteredQueue(queue) {
   // create conditionals for an empty queue or unexpected variables
   queue.forEach(async (input) => {
-    const songName = input.songName;
-    const artistName = input.artistName;
+    const song = input.songName;
+    const artist = input.artistName;
 
-    const trackInfo = await fetchTrackInfo(artistName, songName);
+    const trackInfo = await fetchTrackInfo(artist, song);
     console.log(trackInfo);
     const trackName = trackInfo.track.name;
-    const artistNameApi = trackInfo.track.artist.name;
+    const artistName = trackInfo.track.artist.name;
     const playCount = trackInfo.track.playcount;
     const trackUrl = trackInfo.track.url;
     const imageUrl = trackInfo.track.album.image[3]["#text"];
+    const similarTracks = await interfaceTrackGetSimilar(artist, song);
 
     const trackInfoObject = {
       songName: trackName,
-      artistName: artistNameApi,
+      artistName: artistName,
       playcount: playCount,
       url: trackUrl,
       image: imageUrl,
+      similarTracks: similarTracks,
     };
     console.log(trackInfoObject); //write some logic to save individual tracks to the database
+    await storeSimilarTracksList(trackInfoObject);
 
     /*
-    const eachTracksList = await interfaceTrackGetSimilar(artistName, songName);
-
-    await storeSimilarTracksList(artistName, songName, eachTracksList); // we should store the entire object from last fm not just these values
     await saveMasterKeysFromDBInterface(songName);
     const alikeTracks = await getAlikeTracksInterface();
     await storeTracksFromList(alikeTracks);

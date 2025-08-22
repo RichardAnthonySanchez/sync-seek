@@ -1,6 +1,6 @@
 export const indexedDBService = (function () {
   let db;
-  let versionNumber = 3;
+  let versionNumber = 4;
 
   return {
     intializeDB: function () {
@@ -31,21 +31,20 @@ export const indexedDBService = (function () {
         };
       });
     },
-    saveSimilarTracksList: function (artist, song, list) {
+    saveSimilarTracksList: function (trackObj) {
       console.log("attempting to save similar songs to the database...");
       const transaction = db.transaction("tracks", "readwrite");
       const store = transaction.objectStore("tracks");
-      const trackData = {
-        trackName: song,
-        artistName: artist,
-        similarTracks: list,
-      };
-
-      const request = store.add(trackData);
+      trackObj.similarTracks = trackObj.similarTracks.similartracks.track;
+      console.log(trackObj);
+      const request = store.put({
+        ...trackObj,
+        trackName: trackObj.songName,
+      });
 
       request.onsuccess = function () {
         console.log(
-          `Track ${song} by ${artist} saved successfully to the database.`
+          `Track ${trackObj.songName} by ${trackObj.artistName} saved successfully to the database.`
         );
       };
 

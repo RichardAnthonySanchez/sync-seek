@@ -38,7 +38,7 @@ export async function storeTracksFromList(list) {
       let newList = await fetchTrackGetSimilar(track.artist, track.track);
 
       // Store the new track and list
-      await storeSimilarTracksList(track.artist, track.track, newList);
+      await storeSimilarTracksList(track);
     } catch (error) {
       console.error("Error processing track:", track, error);
     }
@@ -80,7 +80,7 @@ export async function extendSimilarTracksInterface() {
       );
 
       // Store each list and increment the stored count. stored count will be removed when we are no longer using local storage
-      storeSimilarTracksList(track.artist, track.track, fetchedEachTracksList); // might add a count param to this. so we can add it as a prop to each item in the track objectStore
+      storeSimilarTracksList(track); // might add a count param to this. so we can add it as a prop to each item in the track objectStore
       storedCount++;
     } catch (error) {
       console.error("Error fetching or storing track:", track, error);
@@ -100,9 +100,9 @@ export async function extendSimilarTracksInterface() {
   }
 }
 
-export async function storeSimilarTracksList(artist, song, list) {
+export async function storeSimilarTracksList(trackObj) {
   //await storeSimilarTracksLocally(artist, song, list);
-  indexedDBService.saveSimilarTracksList(artist, song, list);
+  indexedDBService.saveSimilarTracksList(trackObj);
 }
 
 export function initializeIndexedDB() {
