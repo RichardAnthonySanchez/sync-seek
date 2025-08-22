@@ -31,6 +31,21 @@ export async function fetchFromFilteredQueue(queue) {
 
     const trackInfo = await fetchTrackInfo(artistName, songName);
     console.log(trackInfo);
+    const trackName = trackInfo.track.name;
+    const artistNameApi = trackInfo.track.artist.name;
+    const playCount = trackInfo.track.playcount;
+    const trackUrl = trackInfo.track.url;
+    const imageUrl = trackInfo.track.album.image[3]["#text"];
+
+    const trackInfoObject = {
+      songName: trackName,
+      artistName: artistNameApi,
+      playcount: playCount,
+      url: trackUrl,
+      image: imageUrl,
+    };
+    console.log(trackInfoObject); //write some logic to save individual tracks to the database
+
     /*
     const eachTracksList = await interfaceTrackGetSimilar(artistName, songName);
 
