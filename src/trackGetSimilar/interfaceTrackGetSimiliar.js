@@ -13,11 +13,10 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
-// create a stop fetching button
-// create a toggle between songs in the db and one for which tracks a similar
-//create an attribute for user submitted tracks vs fetched tracks
-// console log what is in the hopper upon submission and log the length after fetch
-//modify max fetches to 500 while testing
+// create a stop fetching button (fetching from list)
+// create some distiction between generic songs in the db and which one is for our current task of finding matching tracks (distinction from master keys?)
+//modify max fetches to 500 while testing (good for the list extender. it should further fetch from the lists of similarArtists)
+
 //verify we are actually returning similar tracks
 
 export async function fetchFromFilteredQueue(queue) {
@@ -42,6 +41,7 @@ export async function fetchFromFilteredQueue(queue) {
       url: trackUrl,
       image: imageUrl,
       similarTracks: similarTracks.similartracks.track,
+      seedTrack: true,
     };
     console.log(trackInfoObject); //write some logic to save individual tracks to the database
     await storeSimilarTracksList(trackInfoObject);
