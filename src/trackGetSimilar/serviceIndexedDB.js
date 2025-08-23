@@ -35,7 +35,6 @@ export const indexedDBService = (function () {
       console.log("attempting to save similar songs to the database...");
       const transaction = db.transaction("tracks", "readwrite");
       const store = transaction.objectStore("tracks");
-      trackObj.similarTracks = trackObj.similarTracks.similartracks.track;
       console.log(trackObj);
       const request = store.put({
         ...trackObj,

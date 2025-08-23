@@ -44,6 +44,7 @@ function controllerAddTrack() {
       const filteredQueue = await compareQueueToDB(queue);
       //console.log(filteredQueue);
       fetchFromFilteredQueue(filteredQueue);
+      interfaceFilteredQueue.clearFilteredQueue();
     } else if (event.target.id === "add-track") {
       interfaceCreateTrackInput();
     } else if (event.target.id === "extend-similar-tracks") {
@@ -71,6 +72,7 @@ function controllerAddTrack() {
       let queue = getTracksQueue();
       const filteredQueue = await compareQueueToDB(queue);
       fetchFromFilteredQueue(filteredQueue);
+      interfaceFilteredQueue.clearFilteredQueue();
     }
   });
 }
