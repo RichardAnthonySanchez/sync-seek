@@ -56,6 +56,21 @@ function controllerAddTrack() {
       await interfaceViewTracksFromDatabase();
     } else if (event.target.id === "view-queue") {
       await interfaceFilteredQueue.viewFilteredQueue();
+    } else if (event.target.id === "submit-test-songs") {
+      const songName = "matador";
+      const artistName = "the buttertones";
+      let trackQueryObject = interfaceCreateQueryObject(songName, artistName);
+      interfaceQueueTrackInQuery(trackQueryObject);
+      const songNameTwo = "think of you";
+      const artistNameTwo = "bleached";
+      let trackQueryObjectTwo = interfaceCreateQueryObject(
+        songNameTwo,
+        artistNameTwo
+      );
+      interfaceQueueTrackInQuery(trackQueryObjectTwo);
+      let queue = getTracksQueue();
+      const filteredQueue = await compareQueueToDB(queue);
+      fetchFromFilteredQueue(filteredQueue);
     }
   });
 }
