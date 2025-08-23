@@ -22,6 +22,8 @@ import {
   interfaceFilteredQueue,
 } from "./interfaceFilterPreFetch";
 
+import { interfaceGetLists } from "./interfaceCompareTracks";
+
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
     if (event.target.id === "submit-track-get-similar-form") {
@@ -45,6 +47,8 @@ function controllerAddTrack() {
       //console.log(filteredQueue);
       fetchFromFilteredQueue(filteredQueue);
       interfaceFilteredQueue.clearFilteredQueue();
+      let lists = await interfaceGetLists();
+      console.log(lists);
     } else if (event.target.id === "add-track") {
       interfaceCreateTrackInput();
     } else if (event.target.id === "extend-similar-tracks") {
@@ -73,6 +77,8 @@ function controllerAddTrack() {
       const filteredQueue = await compareQueueToDB(queue);
       fetchFromFilteredQueue(filteredQueue);
       interfaceFilteredQueue.clearFilteredQueue();
+      let lists = await interfaceGetLists();
+      console.log(lists);
     }
   });
 }
