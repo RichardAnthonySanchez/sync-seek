@@ -114,8 +114,8 @@ export function initializeIndexedDB() {
   indexedDBService.intializeDB();
 }
 
-export function interfaceGetAllFromDatabase() {
-  const allTracks = indexedDBService.getAllFromDatabase();
+export async function interfaceGetAllFromDatabase() {
+  const allTracks = await indexedDBService.getAllFromDatabase();
   return allTracks;
 }
 

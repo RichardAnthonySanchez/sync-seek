@@ -4,13 +4,10 @@ const modelFilterTracks = (function () {
       const trackCount = {};
       const matchingTracks = [];
 
+      console.log(lists);
       lists.map((list) => {
         // Safeguard: Check if 'track' exists and is an array before mapping over it
-        if (
-          !list.similartracks ||
-          !list.similartracks.track ||
-          !Array.isArray(list.similartracks.track)
-        ) {
+        if (!Array.isArray(list)) {
           console.warn(
             "Skipping list due to missing or invalid 'track' data:",
             list
@@ -18,7 +15,7 @@ const modelFilterTracks = (function () {
           return; // Skip to the next list if 'track' is missing or not an array
         }
 
-        list.similartracks.track.map((track) => {
+        list.map((track) => {
           // Ensure the track object contains both 'name' and 'artist.name'
           if (!track.name || !track.artist || !track.artist.name) {
             console.warn(

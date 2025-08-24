@@ -3,6 +3,7 @@ import { interfaceGetAllFromDatabase } from "./interfaceTracksLibraryDatabase";
 export async function interfaceGetLists() {
   // take tracks from library
   const allTracks = await interfaceGetAllFromDatabase();
+  console.log(allTracks);
   // Is seedTrack true?
   let lists = [];
   allTracks.forEach((element) => {
@@ -11,7 +12,7 @@ export async function interfaceGetLists() {
       lists.push(element.similarTracks);
     } else return;
     // return filtered track's similarArtists lists
-    console.log(lists);
-    return lists;
   });
+  console.log(lists);
+  return lists;
 }

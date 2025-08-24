@@ -67,8 +67,8 @@ export function interfaceCreateTrackInput() {
   createTrackInput();
 }
 
-export async function getAlikeTracksInterface() {
-  const lists = await getStoredSimilarTrackListsInterface();
+export async function getAlikeTracksInterface(lists) {
+  //const lists = await interfaceGetLists();
   const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
   console.log(`${alikeTracks.length} a like tracks found`);
   return alikeTracks;

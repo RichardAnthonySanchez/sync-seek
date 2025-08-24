@@ -8,6 +8,7 @@ import { initializeIndexedDB } from "./trackGetSimilar/interfaceTracksLibraryDat
 import ViewTracksInDatabase from "./trackGetSimilar/viewTracksInDatabase";
 import ViewQueue from "./trackGetSimilar/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
+import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";
 
 function component() {
   createTrackGetSimilarForm();
@@ -21,6 +22,7 @@ function component() {
   initializeIndexedDB();
   ViewQueue();
   ViewSubmitTestSongs();
+  ViewMatchingTracks();
 }
 
 document.body.appendChild(component());
