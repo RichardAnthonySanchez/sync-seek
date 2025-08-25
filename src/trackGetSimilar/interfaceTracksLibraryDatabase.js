@@ -12,8 +12,7 @@ export async function interfaceViewTracksFromDatabase() {
 }
 
 export async function getStoredSimilarTrackListsInterface() {
-  const { similarTracksList } =
-    await indexedDBService.getAllSimilarTracksList();
+  const similarTracksList = await indexedDBService.getAllSimilarTracksList();
   return similarTracksList;
 }
 
@@ -56,7 +55,6 @@ export async function storeTracksFromList(list) {
       track.artist,
       track.track,
       {
-        count: track.count,
         playCount: track.playCount,
         trackUrl: track.trackUrl,
         imageUrl: track.imageUrl,
@@ -66,39 +64,55 @@ export async function storeTracksFromList(list) {
 }
 
 export async function extendSimilarTracksInterface() {
-  // BUG: infinite loop somewhere in here
   let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
 
-  const alikeTracks = await getAlikeTracksInterface();
+  const dbObj = await getStoredSimilarTrackListsInterface();
+  let lists = dbObj.similarTracksList;
 
-  for (const track of alikeTracks) {
-    // this is likely what's taking so long. This is fetching a long list of tracks. One that is often continuing to find new tracks.
+  const alikeTracks = await getAlikeTracksInterface(lists);
+
+  for (let track of alikeTracks) {
     if (storedCount >= 200) {
-      // this isn't 200 fetches as expected. this is 200 inputs into the repeat fetch request.
       console.log(`Reached storage limit of  ${storedCount} tracks.`);
       break;
     }
 
     try {
-      const fetchedEachTracksList = await interfaceTrackGetSimilar(
+      // fetch the similar artist list from the tracks that have matches and update our track object with that property
+      const nestedSimilarList = await interfaceTrackGetSimilar(
         track.artist,
         track.track
       );
 
-      // Store each list and increment the stored count. stored count will be removed when we are no longer using local storage
-      storeSimilarTracksList(track); // might add a count param to this. so we can add it as a prop to each item in the track objectStore
+      const similarTracks = nestedSimilarList.similartracks.track;
+      track = {
+        songName: track.track,
+        artistName: track.artist,
+        playCount: track.playCount,
+        url: track.trackUrl,
+        image: track.imageUrl,
+        similarTracks: similarTracks,
+        seedTrack: true,
+      };
+
+      console.log(track);
+
+      // Store each track with that list
+      storeSimilarTracksList(track);
+      // increment the stored count (incase we have a storage limit)
       storedCount++;
     } catch (error) {
       console.error("Error fetching or storing track:", track, error);
     }
   }
 
-  // Filter the lists to return only tracks that have a match
-  const list = await getAlikeTracksInterface();
+  // Get the second iteration of matching tracks. (We have new songs that will be processed by the getAlikeTracks component)
+  await getAlikeTracksInterface();
 
-  for (const track of list) {
+  const matchingTracks = await getAlikeTracksInterface();
+
+  for (const track of matchingTracks) {
     await indexedDBService.updateProperty(track.artist, track.track, {
-      count: track.count,
       playCount: track.playCount,
       trackUrl: track.trackUrl,
       imageUrl: track.imageUrl,

@@ -13,9 +13,11 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
+// bug: tracks that were previously in the database get saved to some variables? we're getting matching tracks when there is nothing in the database? refreshing fixes this
+// bug: we currently dont support characters (&, #) in songs and artist names
+// make sure excel is getting the count/likeness data, the url, and img url properties. It currently is missing.
 // create a stop fetching button (fetching from list)
 // create some distiction between generic songs in the db and which one is for our current task of finding matching tracks (distinction from master keys?)
-//modify max fetches to 500 while testing (good for the list extender. it should further fetch from the lists of similarArtists)
 
 //verify we are actually returning similar tracks
 

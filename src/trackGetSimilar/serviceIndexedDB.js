@@ -36,14 +36,22 @@ export const indexedDBService = (function () {
       const transaction = db.transaction("tracks", "readwrite");
       const store = transaction.objectStore("tracks");
       console.log(trackObj);
+      let trackName;
+      if (trackObj.songName) {
+        trackName = trackObj.songName;
+      } else if (trackObj.track) {
+        trackName = trackObj.track;
+      } else {
+        console.error(`track name is throwing an error ${trackObj}`);
+      }
       const request = store.put({
         ...trackObj,
-        trackName: trackObj.songName,
+        trackName: trackName,
       });
 
       request.onsuccess = function () {
         console.log(
-          `Track ${trackObj.songName} by ${trackObj.artistName} saved successfully to the database.`
+          `Track ${trackObj.songName} by ${trackObj.artistName} saved successfully to the database.` // expanded list feature changes the data property names. Make sure the property names match
         );
       };
 
