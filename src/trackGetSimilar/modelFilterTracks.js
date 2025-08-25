@@ -33,8 +33,8 @@ const modelFilterTracks = (function () {
       for (const trackName in trackCount) {
         if (trackCount[trackName].count > 1) {
           matchingTracks.push({
-            track: trackName,
-            artist: trackCount[trackName].artist,
+            trackName: trackName,
+            artistName: trackCount[trackName].artist,
             count: trackCount[trackName].count,
             playCount: trackCount[trackName].playCount,
             trackUrl: trackCount[trackName].trackUrl,
@@ -60,6 +60,7 @@ const modelFilterTracks = (function () {
       // Initialize track count
       if (!trackCount[trackName]) {
         trackCount[trackName] = {
+          trackName: trackName,
           count: 0,
           artist: artistName,
           playCount: playCount,
