@@ -32,6 +32,7 @@ export async function storeTracksFromList(list) {
   const alikeTracks = list;
 
   for (const track of alikeTracks) {
+    // might be an infinite loop.
     try {
       // Ensure track has the necessary properties (artist, track) before proceeding
       if (!track.artist || !track.track) {
