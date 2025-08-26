@@ -21,7 +21,6 @@ export async function getAllSimilarTrackObjectsInterface() {
   return allTracks;
 }
 export async function storeTracksFromList(list) {
-  //this only triggers from the list thats input. this doesn't update props to resulting bigger list
   // Ensure that the input `list` is an array before proceeding
   if (!Array.isArray(list)) {
     console.error("Expected an array, but received:", list);
@@ -31,7 +30,6 @@ export async function storeTracksFromList(list) {
   const alikeTracks = list;
 
   for (const track of alikeTracks) {
-    // might be an infinite loop.
     try {
       // Ensure track has the necessary properties (artist, track) before proceeding
       if (!track.artist || !track.track) {
@@ -39,27 +37,17 @@ export async function storeTracksFromList(list) {
         continue; // Skip to the next track if required data is missing
       }
 
-      // Fetch a new list of similar tracks for each track
-      let newList = await fetchTrackGetSimilar(track.artist, track.track);
-
       // Store the new track and list
       await storeSimilarTracksList(track);
     } catch (error) {
       console.error("Error processing track:", track, error);
     }
-
-    // Update track count in the indexedDB
-    await indexedDBService.updateProperty(
-      // can we send more than the track count here. example, urls, images, plays etc
-      // BUG: we are getting warnings for not having having tracks in db or doesnt have matching track and artist values. why? most dont have track name dupes. what else could be the problem?
-      track.artist,
-      track.track,
-      {
-        playCount: track.playCount,
-        trackUrl: track.trackUrl,
-        imageUrl: track.imageUrl,
-      }
-    );
+    /*
+    await indexedDBService.updateProperty(track.artist, track.track, {
+      playCount: track.playCount,
+      trackUrl: track.trackUrl,
+      imageUrl: track.imageUrl,
+    });*/
   }
 }
 
