@@ -68,7 +68,7 @@ export async function extendSimilarTracksInterface() {
 
   const dbObj = await getStoredSimilarTrackListsInterface();
   let lists = dbObj.similarTracksList;
-
+  console.log(lists);
   const alikeTracks = await getAlikeTracksInterface(lists);
 
   for (let track of alikeTracks) {
@@ -78,16 +78,17 @@ export async function extendSimilarTracksInterface() {
     }
 
     try {
+      console.log(track);
       // fetch the similar artist list from the tracks that have matches and update our track object with that property
       const nestedSimilarList = await interfaceTrackGetSimilar(
-        track.artist,
-        track.track
+        track.artistName,
+        track.trackName
       );
 
       const similarTracks = nestedSimilarList.similartracks.track;
       track = {
-        songName: track.track,
-        artistName: track.artist,
+        songName: track.trackName,
+        artistName: track.artistName,
         playCount: track.playCount,
         url: track.trackUrl,
         image: track.imageUrl,
@@ -105,10 +106,10 @@ export async function extendSimilarTracksInterface() {
       console.error("Error fetching or storing track:", track, error);
     }
   }
-
+  //console.log(track); // undefined
   // Get the second iteration of matching tracks. (We have new songs that will be processed by the getAlikeTracks component)
   await getAlikeTracksInterface();
-
+  /*
   const matchingTracks = await getAlikeTracksInterface();
 
   for (const track of matchingTracks) {
@@ -118,6 +119,7 @@ export async function extendSimilarTracksInterface() {
       imageUrl: track.imageUrl,
     });
   }
+    */
 }
 
 export async function storeSimilarTracksList(trackObj) {

@@ -14,7 +14,6 @@ import exportToExcel from "./exportToExcel";
 
 //to-do list
 // create a stop fetching button (fetching from list)
-// create some distiction between generic songs in the db and which one is for our current task of finding matching tracks (distinction from master keys?)
 // potential bug: tracks that were previously in the database get saved to some variables? we're getting matching tracks when there is nothing in the database? refreshing fixes this
 // bug: we currently dont support characters (&, #) in songs and artist names
 
@@ -69,10 +68,19 @@ export function interfaceCreateTrackInput() {
 }
 
 export async function getAlikeTracksInterface(lists) {
-  //const lists = await interfaceGetLists();
-  const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
-  console.log(`${alikeTracks.length} a like tracks found`);
-  return alikeTracks;
+  try {
+    if (lists && Array.isArray(lists) && lists.length > 0) {
+      const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
+      console.log(`${alikeTracks.length} a like tracks found`);
+      return alikeTracks;
+    } else {
+      throw new Error(
+        "Invalid input: lists must be an array with at least one element"
+      );
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
 export function deleteMasterKeysInterface() {
