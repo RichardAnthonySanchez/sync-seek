@@ -46,12 +46,6 @@ export async function fetchFromFilteredQueue(queue) {
     };
     console.log(trackInfoObject); //write some logic to save individual tracks to the database
     await storeSimilarTracksList(trackInfoObject);
-
-    /*
-    await saveMasterKeysFromDBInterface(songName);
-    const alikeTracks = await getAlikeTracksInterface();
-    await storeTracksFromList(alikeTracks);
-    */
   });
 }
 
@@ -89,7 +83,6 @@ export function deleteMasterKeysInterface() {
 }
 
 export async function exportToExcelInterface() {
-  //const data = await getAllSimilarTrackObjectsInterface();
   const dbObj = await getStoredSimilarTrackListsInterface();
   let lists = dbObj.similarTracksList;
   const alikeTracks = await getAlikeTracksInterface(lists);

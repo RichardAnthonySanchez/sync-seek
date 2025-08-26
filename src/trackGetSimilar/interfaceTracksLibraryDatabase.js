@@ -60,8 +60,8 @@ export async function extendSimilarTracksInterface() {
   const alikeTracks = await getAlikeTracksInterface(lists);
 
   for (let track of alikeTracks) {
-    // don't fetch more than 200 songs
-    if (storedCount >= 200) {
+    // don't fetch more than 50 songs
+    if (storedCount >= 50) {
       console.log(`Reached storage limit of  ${storedCount} tracks.`);
       break;
     }
@@ -70,12 +70,12 @@ export async function extendSimilarTracksInterface() {
       // fetch the similar artist list from the tracks that have matches and update our track object with that property
       const nestedSimilarList = await interfaceTrackGetSimilar(
         track.artistName,
-        track.trackName
+        track.songName
       );
       const similarTracks = nestedSimilarList.similartracks.track;
       // Turn the fetched track into the schema for our database
       track = {
-        songName: track.trackName,
+        songName: track.songName,
         artistName: track.artistName,
         playCount: track.playCount,
         trackUrl: track.trackUrl,
