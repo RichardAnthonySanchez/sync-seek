@@ -1,7 +1,6 @@
 import {
   getStoredSimilarTrackListsInterface,
   getAllSimilarTrackObjectsInterface,
-  storeTracksFromList,
   storeSimilarTracksList,
   saveMasterKeysFromDBInterface,
 } from "./interfaceTracksLibraryDatabase";
@@ -13,11 +12,13 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
+// tests
+// verify we are actually returning similar tracks
+
+// refactor the extendslist method to be more concise
 // create a stop fetching button (fetching from list)
 // potential bug: tracks that were previously in the database get saved to some variables? we're getting matching tracks when there is nothing in the database? refreshing fixes this
 // bug: we currently dont support characters (&, #) in songs and artist names
-
-//verify we are actually returning similar tracks
 
 export async function fetchFromFilteredQueue(queue) {
   // create conditionals for an empty queue or unexpected variables

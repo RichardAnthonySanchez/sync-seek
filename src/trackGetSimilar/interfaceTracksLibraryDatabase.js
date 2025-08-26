@@ -21,6 +21,7 @@ export async function getAllSimilarTrackObjectsInterface() {
   return allTracks;
 }
 export async function storeTracksFromList(list) {
+  // I don't think we're using this method anymore
   // Ensure that the input `list` is an array before proceeding
   if (!Array.isArray(list)) {
     console.error("Expected an array, but received:", list);
@@ -56,35 +57,32 @@ export async function extendSimilarTracksInterface() {
 
   const dbObj = await getStoredSimilarTrackListsInterface();
   let lists = dbObj.similarTracksList;
-  console.log(lists);
   const alikeTracks = await getAlikeTracksInterface(lists);
 
   for (let track of alikeTracks) {
+    // don't fetch more than 200 songs
     if (storedCount >= 200) {
       console.log(`Reached storage limit of  ${storedCount} tracks.`);
       break;
     }
 
     try {
-      console.log(track);
       // fetch the similar artist list from the tracks that have matches and update our track object with that property
       const nestedSimilarList = await interfaceTrackGetSimilar(
         track.artistName,
         track.trackName
       );
-
       const similarTracks = nestedSimilarList.similartracks.track;
+      // Turn the fetched track into the schema for our database
       track = {
         songName: track.trackName,
         artistName: track.artistName,
         playCount: track.playCount,
-        url: track.trackUrl,
-        image: track.imageUrl,
+        trackUrl: track.trackUrl,
+        imageUrl: track.imageUrl,
         similarTracks: similarTracks,
         seedTrack: true,
       };
-
-      console.log(track);
 
       // Store each track with that list
       storeSimilarTracksList(track);
@@ -94,25 +92,18 @@ export async function extendSimilarTracksInterface() {
       console.error("Error fetching or storing track:", track, error);
     }
   }
-  //console.log(track); // undefined
-  // Get the second iteration of matching tracks. (We have new songs that will be processed by the getAlikeTracks component)
-  await getAlikeTracksInterface();
-  /*
-  const matchingTracks = await getAlikeTracksInterface();
-
-  for (const track of matchingTracks) {
-    await indexedDBService.updateProperty(track.artist, track.track, {
-      playCount: track.playCount,
-      trackUrl: track.trackUrl,
-      imageUrl: track.imageUrl,
-    });
-  }
-    */
 }
 
 export async function storeSimilarTracksList(trackObj) {
-  //await storeSimilarTracksLocally(artist, song, list);
-  indexedDBService.saveSimilarTracksList(trackObj);
+  try {
+    // if you're trying to save a track that doesn't have the min spec, get outta hea!
+    if (!trackObj || !trackObj.songName || !trackObj.artistName) {
+      console.warn("Track data is not what is expected", trackObj);
+    }
+    indexedDBService.saveSimilarTracksList(trackObj);
+  } catch (error) {
+    console.error("Error processing track:", trackObj, error);
+  }
 }
 
 export function initializeIndexedDB() {
