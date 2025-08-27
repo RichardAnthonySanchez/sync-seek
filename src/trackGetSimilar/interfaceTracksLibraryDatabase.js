@@ -43,54 +43,6 @@ export async function storeTracksFromList(list) {
     } catch (error) {
       console.error("Error processing track:", track, error);
     }
-    /*
-    await indexedDBService.updateProperty(track.artist, track.track, {
-      playCount: track.playCount,
-      trackUrl: track.trackUrl,
-      imageUrl: track.imageUrl,
-    });*/
-  }
-}
-
-export async function extendSimilarTracksInterface() {
-  let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
-
-  const dbObj = await getStoredSimilarTrackListsInterface();
-  let lists = dbObj.similarTracksList;
-  const alikeTracks = await getAlikeTracksInterface(lists);
-
-  for (let track of alikeTracks) {
-    // don't fetch more than 50 songs
-    if (storedCount >= 50) {
-      console.log(`Reached storage limit of  ${storedCount} tracks.`);
-      break;
-    }
-
-    try {
-      // fetch the similar artist list from the tracks that have matches and update our track object with that property
-      const nestedSimilarList = await interfaceTrackGetSimilar(
-        track.artistName,
-        track.songName
-      );
-      const similarTracks = nestedSimilarList.similartracks.track;
-      // Turn the fetched track into the schema for our database
-      track = {
-        songName: track.songName,
-        artistName: track.artistName,
-        playCount: track.playCount,
-        trackUrl: track.trackUrl,
-        imageUrl: track.imageUrl,
-        similarTracks: similarTracks,
-        seedTrack: true,
-      };
-
-      // Store each track with that list
-      storeSimilarTracksList(track);
-      // increment the stored count (incase we have a storage limit)
-      storedCount++;
-    } catch (error) {
-      console.error("Error fetching or storing track:", track, error);
-    }
   }
 }
 
@@ -121,6 +73,7 @@ export function saveMasterKeysFromDBInterface(trackName) {
 }
 
 export function getMasterKeysFromDBInterface() {
+  // I don't think we're using this anymore
   const masterKey = indexedDBService.getMasterKeys(); // run console logs to see if this is executing
   return masterKey;
   // this will be used instead of the get all track method.

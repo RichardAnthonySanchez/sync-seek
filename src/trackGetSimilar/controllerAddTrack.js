@@ -7,10 +7,11 @@ import {
 } from "./interfaceTrackGetSimiliar";
 
 import {
-  extendSimilarTracksInterface,
   clearAllTracksInterface,
   interfaceViewTracksFromDatabase,
 } from "./interfaceTracksLibraryDatabase";
+
+import { extendSimilarTracksInterface } from "./interfaceListTrackHydration";
 
 import {
   interfaceCreateQueryObject,
