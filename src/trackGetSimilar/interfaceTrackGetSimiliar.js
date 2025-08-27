@@ -10,9 +10,9 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
-// bug: we currently dont support characters (&, #) in songs and artist names
-// potential bug: tracks that were previously in the database get saved to some variables? we're getting matching tracks when there is nothing in the database? refreshing fixes this
-// create a stop fetching button (fetching from list)
+// bug: we fetch dupes during the listTrackHydration upon multiple uses of the extendList feature
+// bug: tracks that were previously in the database get saved to some variables? resting the value matchingTracks value should fix this issue.
+// create a stop fetching button (fetching from list). Might be able to make a boolean in the listTrackHydreation's main conditional
 
 export async function fetchFromFilteredQueue(queue) {
   // create conditionals for an empty queue or unexpected variables
