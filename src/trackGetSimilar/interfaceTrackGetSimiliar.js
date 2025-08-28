@@ -22,7 +22,7 @@ export async function fetchFromFilteredQueue(queue) {
 
     const trackInfo = await fetchTrackInfo(artist, song);
     console.log(trackInfo);
-    const trackName = trackInfo.track.name;
+    const songName = trackInfo.track.name;
     const artistName = trackInfo.track.artist.name;
     const playCount = trackInfo.track.playcount;
     const trackUrl = trackInfo.track.url;
@@ -30,7 +30,7 @@ export async function fetchFromFilteredQueue(queue) {
     const similarTracks = await interfaceTrackGetSimilar(artist, song);
 
     const trackInfoObject = {
-      songName: trackName,
+      songName: songName,
       artistName: artistName,
       playcount: playCount,
       url: trackUrl,
