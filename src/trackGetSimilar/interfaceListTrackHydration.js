@@ -12,7 +12,9 @@ export async function extendSimilarTracksInterface() {
   let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
 
   const dbObj = await getStoredSimilarTrackListsInterface();
+  console.log(dbObj);
   let lists = dbObj.similarTracksList;
+  console.log(lists);
   const alikeTracks = await getAlikeTracksInterface(lists);
 
   for (let track of alikeTracks) {
@@ -27,9 +29,9 @@ export async function extendSimilarTracksInterface() {
       const similarTracks = await getList(track.artistName, track.songName);
 
       // Turn the fetched track into the schema for our database
-      transformToSchema(track, similarTracks);
+      track = transformToSchema(track, similarTracks);
       // Store each track with that list
-      track = storeSimilarTracksList(track);
+      storeSimilarTracksList(track);
       // increment the stored count (incase we have a storage limit)
       storedCount++;
     } catch (error) {
