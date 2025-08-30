@@ -11,7 +11,10 @@ import {
   interfaceViewTracksFromDatabase,
 } from "./interfaceTracksLibraryDatabase";
 
-import { extendSimilarTracksInterface } from "./interfaceListTrackHydration";
+import {
+  extendSimilarTracksInterface,
+  stopFetching,
+} from "./interfaceListTrackHydration";
 
 import {
   interfaceCreateQueryObject,
@@ -61,6 +64,8 @@ function controllerAddTrack() {
       await interfaceViewTracksFromDatabase();
     } else if (event.target.id === "view-queue") {
       await interfaceFilteredQueue.viewFilteredQueue();
+    } else if (event.target.id === "view-stop-fetching") {
+      stopFetching();
     } else if (event.target.id === "submit-test-songs") {
       const songName = "matador";
       const artistName = "the buttertones";

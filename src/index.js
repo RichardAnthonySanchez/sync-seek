@@ -9,6 +9,7 @@ import ViewTracksInDatabase from "./trackGetSimilar/viewTracksInDatabase";
 import ViewQueue from "./trackGetSimilar/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
 import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";
+import ViewStopFetching from "./trackGetSimilar/viewStopFetching";
 
 function component() {
   createTrackGetSimilarForm();
@@ -23,6 +24,7 @@ function component() {
   ViewQueue();
   ViewSubmitTestSongs();
   ViewMatchingTracks();
+  ViewStopFetching();
 }
 
 document.body.appendChild(component());

@@ -10,7 +10,10 @@ import {
 
 import { getExistingSongsSet } from "./interfaceFilterPreFetch";
 
+let stopRequested = false;
+
 export async function extendSimilarTracksInterface() {
+  stopRequested = false;
   let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
 
   const dbObj = await getStoredSimilarTrackListsInterface();
@@ -21,21 +24,22 @@ export async function extendSimilarTracksInterface() {
   let existingSongsSet = getExistingSongsSet(allTracks);
 
   for (let track of alikeTracks) {
-    // don't fetch more than 50 songs
+    if (stopRequested) {
+      console.log("Stopping fetch loop by request.");
+      break;
+    }
+
     if (storedCount >= 50) {
-      console.log(`Reached storage limit of  ${storedCount} tracks.`);
+      console.log(`Reached storage limit of ${storedCount} tracks.`);
       break;
     }
 
     try {
-      // fetch the similar artist list from the tracks that have matches and update our track object with that property
       const similarTracks = await getList(track.artistName, track.songName);
 
-      // Turn the fetched track into the schema for our database
       track = transformToSchema(track, similarTracks);
-      // Store each track with that list
       storeUniqueTracks(track, existingSongsSet);
-      // increment the stored count (incase we have a storage limit)
+
       storedCount++;
     } catch (error) {
       console.error("Error fetching or storing track:", track, error);
@@ -77,4 +81,8 @@ function storeUniqueTracks(track, trackSet) {
       `skipping ${track.songName} because it already exists in the database`
     );
   }
+}
+
+export function stopFetching() {
+  stopRequested = true;
 }
