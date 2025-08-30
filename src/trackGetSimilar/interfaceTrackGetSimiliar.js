@@ -2,8 +2,8 @@ import {
   getStoredSimilarTrackListsInterface,
   storeSimilarTracksList,
 } from "./interfaceTracksLibraryDatabase";
-import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
-import { fetchTrackInfo } from "./fetchTrackGetSimilar";
+import fetchTrackGetSimilar from "./fetchTracks/fetchTrackGetSimilar";
+import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
 import modelFilterTracks from "./modelFilterTracks";
 import { deleteMasterKeysLocally } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
@@ -51,10 +51,12 @@ export async function interfaceTrackGetSimilar(artist, song) {
 }
 
 export function interfaceCreateTrackInput() {
+  // put this in the views module
   createTrackInput();
 }
 
 export async function getAlikeTracksInterface(lists) {
+  // this should be in the track matching module
   try {
     if (lists && Array.isArray(lists) && lists.length > 0) {
       const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
@@ -74,10 +76,12 @@ export async function getAlikeTracksInterface(lists) {
 }
 
 export function deleteMasterKeysInterface() {
+  // i don't think this is used any more
   deleteMasterKeysLocally();
 }
 
 export async function exportToExcelInterface() {
+  // this can be in its own excel interface module
   const dbObj = await getStoredSimilarTrackListsInterface();
   let lists = dbObj.similarTracksList;
   const alikeTracks = await getAlikeTracksInterface(lists);
