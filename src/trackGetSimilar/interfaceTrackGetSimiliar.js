@@ -10,7 +10,6 @@ import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportToExcel";
 
 //to-do list
-// bug: tracks that were previously in the database get saved to some variables? resting the value matchingTracks value should fix this issue.
 // create a stop fetching button (fetching from list). Might be able to make a boolean in the listTrackHydreation's main conditional
 
 export async function fetchFromFilteredQueue(queue) {
@@ -68,6 +67,9 @@ export async function getAlikeTracksInterface(lists) {
     }
   } catch (error) {
     console.error(error.message);
+  } finally {
+    // clear the list data for future requests for getting alike tracks
+    modelFilterTracks.clearMatchingTracks();
   }
 }
 

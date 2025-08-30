@@ -1,10 +1,4 @@
-import {
-  getAlikeTracksInterface,
-  interfaceTrackGetSimilar,
-} from "./interfaceTrackGetSimiliar";
 import { indexedDBService } from "./serviceIndexedDB";
-
-import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
 
 export async function interfaceViewTracksFromDatabase() {
   const allTracks = await interfaceGetAllFromDatabase();

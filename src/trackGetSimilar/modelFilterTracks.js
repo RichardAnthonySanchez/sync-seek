@@ -1,6 +1,6 @@
 const modelFilterTracks = (function () {
-  const trackCount = {};
-  const matchingTracks = [];
+  let trackCount = {};
+  let matchingTracks = [];
 
   return {
     getAlikeTracks: function (lists) {
@@ -71,6 +71,10 @@ const modelFilterTracks = (function () {
 
       // Increment the track count
       trackCount[trackName].count++;
+    },
+    clearMatchingTracks: function () {
+      trackCount = {};
+      matchingTracks = [];
     },
   };
 })();
