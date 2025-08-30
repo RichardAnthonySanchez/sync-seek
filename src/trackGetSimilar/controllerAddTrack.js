@@ -20,7 +20,7 @@ import {
   interfaceCreateQueryObject,
   interfaceQueueTrackInQuery,
   getTracksQueue,
-} from "./interfaceTrackQuery";
+} from "./queryAssembler/interfaceTrackQuery";
 
 import {
   compareQueueToDB,
