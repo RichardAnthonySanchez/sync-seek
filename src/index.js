@@ -6,7 +6,7 @@ import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
 import { initializeIndexedDB } from "./trackGetSimilar/tracksDatabase/interfaceTracksLibraryDatabase";
 import ViewTracksInDatabase from "./trackGetSimilar/tracksDatabase/viewTracksInDatabase";
-import ViewQueue from "./trackGetSimilar/viewQueue";
+import ViewQueue from "./trackGetSimilar/queryAssembler/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
 import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";
 import ViewStopFetching from "./trackGetSimilar/viewStopFetching";
