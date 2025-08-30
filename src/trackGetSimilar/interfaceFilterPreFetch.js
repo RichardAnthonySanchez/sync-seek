@@ -47,7 +47,7 @@ export async function compareQueueToDB(queue) {
   return filteredQueue;
 }
 
-function getExistingSongsSet(db) {
+export function getExistingSongsSet(db) {
   // hash table for fast loop up
   // filter database on song or (song|title)
   const existingSongs = new Set(
@@ -122,7 +122,7 @@ function normalizeQueueData(queue) {
   return normalizedQueue.filter(Boolean); // Remove any undefined values
 }
 
-function normalizeString(str) {
+export function normalizeString(str) {
   return str
     .normalize("NFD") // split accents from letters
     .replace(/\p{Diacritic}/gu, "") // remove accents

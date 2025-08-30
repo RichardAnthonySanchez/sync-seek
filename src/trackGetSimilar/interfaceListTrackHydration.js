@@ -8,6 +8,8 @@ import {
   storeSimilarTracksList,
 } from "./interfaceTracksLibraryDatabase";
 
+import { getExistingSongsSet } from "./interfaceFilterPreFetch";
+
 export async function extendSimilarTracksInterface() {
   let storedCount = 0; // Counter to track how many similar tracks have been stored. This will be deleted after not using local storage
 
@@ -16,7 +18,7 @@ export async function extendSimilarTracksInterface() {
   const alikeTracks = await getAlikeTracksInterface(lists);
 
   const allTracks = dbObj.allTracks;
-  let existingSongsSet = getExistingSongsSet(allTracks); // do we need to update the set every time we store a new track?
+  let existingSongsSet = getExistingSongsSet(allTracks);
 
   for (let track of alikeTracks) {
     // don't fetch more than 50 songs
@@ -69,28 +71,10 @@ function storeUniqueTracks(track, trackSet) {
     console.log("Adding", track);
     // storing logic
     storeSimilarTracksList(track);
-    // update the existingSongSet after storing
+    trackSet.add(key); // I dont think this is changing the existingSongSet as expected
   } else {
     console.warn(
       `skipping ${track.songName} because it already exists in the database`
     );
   }
-}
-
-function getExistingSongsSet(db) {
-  // hash table for fast loop up
-  // filter database on song or (song|title)
-  const existingSongs = new Set(
-    db.map((song) => normalizeString(song.trackName))
-  );
-  //  we can use a key pattern like ${song.track}|${song.artist} after testing with just the track name
-  return existingSongs;
-}
-
-function normalizeString(str) {
-  return str
-    .normalize("NFD") // split accents from letters
-    .replace(/\p{Diacritic}/gu, "") // remove accents
-    .toLowerCase()
-    .trim();
 }
