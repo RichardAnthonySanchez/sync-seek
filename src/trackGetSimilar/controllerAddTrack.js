@@ -25,7 +25,7 @@ import {
 import {
   compareQueueToDB,
   interfaceFilteredQueue,
-} from "./interfaceFilterPreFetch";
+} from "./filterPreFetch/interfaceFilterPreFetch";
 
 import { interfaceGetLists } from "./interfaceCompareTracks";
 

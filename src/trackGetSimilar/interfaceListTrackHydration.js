@@ -8,7 +8,7 @@ import {
   storeSimilarTracksList,
 } from "./interfaceTracksLibraryDatabase";
 
-import { getExistingSongsSet } from "./interfaceFilterPreFetch";
+import { getExistingSongsSet } from "./filterPreFetch/interfaceFilterPreFetch";
 
 let stopRequested = false;
 
