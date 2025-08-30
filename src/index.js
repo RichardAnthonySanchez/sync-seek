@@ -4,8 +4,8 @@ import { createTrackGetSimilarForm } from "./trackGetSimilar/viewTrackGetSimilar
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/viewExtendSimilarTracksButton";
-import { initializeIndexedDB } from "./trackGetSimilar/interfaceTracksLibraryDatabase";
-import ViewTracksInDatabase from "./trackGetSimilar/viewTracksInDatabase";
+import { initializeIndexedDB } from "./trackGetSimilar/tracksDatabase/interfaceTracksLibraryDatabase";
+import ViewTracksInDatabase from "./trackGetSimilar/tracksDatabase/viewTracksInDatabase";
 import ViewQueue from "./trackGetSimilar/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
 import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";

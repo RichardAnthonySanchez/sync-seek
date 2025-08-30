@@ -1,4 +1,4 @@
-import { interfaceGetAllFromDatabase } from "./interfaceTracksLibraryDatabase";
+import { interfaceGetAllFromDatabase } from "./tracksDatabase/interfaceTracksLibraryDatabase";
 
 export async function interfaceGetLists() {
   // take tracks from library

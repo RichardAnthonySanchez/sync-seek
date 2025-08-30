@@ -6,7 +6,7 @@ import {
 import {
   getStoredSimilarTrackListsInterface,
   storeSimilarTracksList,
-} from "./interfaceTracksLibraryDatabase";
+} from "./tracksDatabase/interfaceTracksLibraryDatabase";
 
 import { getExistingSongsSet } from "./filterPreFetch/interfaceFilterPreFetch";
 

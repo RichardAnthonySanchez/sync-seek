@@ -1,6 +1,6 @@
 import {
   interfaceCreateTrackInput,
-  deleteMasterKeysInterface,
+  //deleteMasterKeysInterface,
   exportToExcelInterface,
   fetchFromFilteredQueue,
   getAlikeTracksInterface,
@@ -9,7 +9,7 @@ import {
 import {
   clearAllTracksInterface,
   interfaceViewTracksFromDatabase,
-} from "./interfaceTracksLibraryDatabase";
+} from "./tracksDatabase/interfaceTracksLibraryDatabase";
 
 import {
   extendSimilarTracksInterface,
@@ -33,7 +33,7 @@ function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
     if (event.target.id === "submit-track-get-similar-form") {
       event.preventDefault();
-      deleteMasterKeysInterface();
+      //deleteMasterKeysInterface();
       const songInputs = document.querySelectorAll(".song-name-input");
       const artistInputs = document.querySelectorAll(".artist-name-input");
 

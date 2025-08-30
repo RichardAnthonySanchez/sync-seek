@@ -1,5 +1,5 @@
 import { filter } from "lodash";
-import { interfaceGetAllFromDatabase } from "../interfaceTracksLibraryDatabase";
+import { interfaceGetAllFromDatabase } from "../tracksDatabase/interfaceTracksLibraryDatabase";
 
 export const interfaceFilteredQueue = (function () {
   let filteredQueue = [];
