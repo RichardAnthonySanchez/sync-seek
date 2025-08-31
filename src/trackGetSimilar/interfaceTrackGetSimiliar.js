@@ -7,7 +7,6 @@ import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
 import modelFilterTracks from "./compareMatchingTracks/modelFilterTracks";
 //import { deleteMasterKeysLocally } from "./storeSimilarTracks";
 //import { createTrackInput } from "./views/viewTrackGetSimilarForm";
-import exportToExcel from "./exportTracksList/exportToExcel";
 
 //to-do list
 // organize module files into several sub-directories for readability
@@ -81,12 +80,3 @@ export function deleteMasterKeysInterface() {
   deleteMasterKeysLocally();
 }
 */
-
-export async function exportToExcelInterface() {
-  // this can be in its own excel interface module
-  const dbObj = await getStoredSimilarTrackListsInterface();
-  let lists = dbObj.similarTracksList;
-  const alikeTracks = await getAlikeTracksInterface(lists);
-  //console.log(alikeTracks);
-  exportToExcel(alikeTracks);
-}
