@@ -28,6 +28,7 @@ import {
 } from "./filterPreFetch/interfaceFilterPreFetch";
 
 import { interfaceGetLists } from "./filterSeedTracks/interfaceCompareTracks";
+import { createTrackInput } from "./views/viewTrackGetSimilarForm";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -53,7 +54,7 @@ function controllerAddTrack() {
       fetchFromFilteredQueue(filteredQueue);
       interfaceFilteredQueue.clearFilteredQueue();
     } else if (event.target.id === "add-track") {
-      interfaceCreateTrackInput();
+      createTrackInput();
     } else if (event.target.id === "extend-similar-tracks") {
       extendSimilarTracksInterface();
     } else if (event.target.id === "delete-artists") {

@@ -6,7 +6,7 @@ import fetchTrackGetSimilar from "./fetchTracks/fetchTrackGetSimilar";
 import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
 import modelFilterTracks from "./compareMatchingTracks/modelFilterTracks";
 //import { deleteMasterKeysLocally } from "./storeSimilarTracks";
-import { createTrackInput } from "./viewTrackGetSimilarForm";
+//import { createTrackInput } from "./views/viewTrackGetSimilarForm";
 import exportToExcel from "./exportTracksList/exportToExcel";
 
 //to-do list
@@ -49,11 +49,11 @@ export async function interfaceTrackGetSimilar(artist, song) {
   console.log(similarTracks);
   return similarTracks;
 }
-
+/*
 export function interfaceCreateTrackInput() {
   // put this in the views module
   createTrackInput();
-}
+}*/
 
 export async function getAlikeTracksInterface(lists) {
   // this should be in the track matching module
