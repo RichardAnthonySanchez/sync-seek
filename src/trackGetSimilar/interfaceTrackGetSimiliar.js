@@ -7,7 +7,7 @@ import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
 import modelFilterTracks from "./modelFilterTracks";
 //import { deleteMasterKeysLocally } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
-import exportToExcel from "./exportToExcel";
+import exportToExcel from "./exportTracksList/exportToExcel";
 
 //to-do list
 // organize module files into several sub-directories for readability

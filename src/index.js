@@ -1,5 +1,4 @@
 import viewButtonDeleteArtists from "./deleteArtists/viewButtonDeleteArtists";
-import viewButtonSortArtists from "./sortSimilarArtists/viewButtonSortArtists";
 import { createTrackGetSimilarForm } from "./trackGetSimilar/viewTrackGetSimilarForm";
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import viewAddTrackButton from "./trackGetSimilar/viewAddTrackButton";
@@ -10,6 +9,7 @@ import ViewQueue from "./trackGetSimilar/queryAssembler/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
 import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";
 import ViewStopFetching from "./trackGetSimilar/viewStopFetching";
+import viewExportTracks from "./trackGetSimilar/exportTracksList/viewExportTracks";
 
 function component() {
   createTrackGetSimilarForm();
@@ -17,7 +17,7 @@ function component() {
   controllerAddTrack();
   viewAddTrackButton();
   viewButtonDeleteArtists();
-  viewButtonSortArtists();
+  viewExportTracks();
   ViewExtendSimilarTracksButton();
   ViewTracksInDatabase();
   initializeIndexedDB();
