@@ -27,7 +27,7 @@ import {
   interfaceFilteredQueue,
 } from "./filterPreFetch/interfaceFilterPreFetch";
 
-import { interfaceGetLists } from "./interfaceCompareTracks";
+import { interfaceGetLists } from "./filterSeedTracks/interfaceCompareTracks";
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
