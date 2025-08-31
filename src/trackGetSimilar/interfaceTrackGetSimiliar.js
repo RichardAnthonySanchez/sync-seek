@@ -4,7 +4,7 @@ import {
 } from "./tracksDatabase/interfaceTracksLibraryDatabase";
 import fetchTrackGetSimilar from "./fetchTracks/fetchTrackGetSimilar";
 import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
-import modelFilterTracks from "./modelFilterTracks";
+import modelFilterTracks from "./compareMatchingTracks/modelFilterTracks";
 //import { deleteMasterKeysLocally } from "./storeSimilarTracks";
 import { createTrackInput } from "./viewTrackGetSimilarForm";
 import exportToExcel from "./exportTracksList/exportToExcel";

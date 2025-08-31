@@ -7,7 +7,7 @@ import { initializeIndexedDB } from "./trackGetSimilar/tracksDatabase/interfaceT
 import ViewTracksInDatabase from "./trackGetSimilar/tracksDatabase/viewTracksInDatabase";
 import ViewQueue from "./trackGetSimilar/queryAssembler/viewQueue";
 import ViewSubmitTestSongs from "./trackGetSimilar/viewSubmitTestSongs";
-import ViewMatchingTracks from "./trackGetSimilar/viewMatchingTracks";
+import ViewMatchingTracks from "./trackGetSimilar/compareMatchingTracks/viewMatchingTracks";
 import ViewStopFetching from "./trackGetSimilar/viewStopFetching";
 import viewExportTracks from "./trackGetSimilar/exportTracksList/viewExportTracks";
 
