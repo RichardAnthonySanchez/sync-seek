@@ -1,6 +1,6 @@
-import { storeSimilarTracksList } from "./tracksDatabase/interfaceTracksLibraryDatabase";
-import fetchTrackGetSimilar from "./fetchTracks/fetchTrackGetSimilar";
-import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
+import { storeSimilarTracksList } from "../tracksDatabase/interfaceTracksLibraryDatabase";
+import fetchTrackGetSimilar from "./fetchTrackGetSimilar";
+import { fetchTrackInfo } from "./fetchTrackGetSimilar";
 
 export async function fetchFromFilteredQueue(queue) {
   // create conditionals for an empty queue or unexpected variables

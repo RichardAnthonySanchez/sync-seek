@@ -1,4 +1,4 @@
-import { interfaceTrackGetSimilar } from "../interfaceTrackGetSimiliar";
+import { interfaceTrackGetSimilar } from "../fetchTracks/interfaceFetchTracks";
 
 import { getAlikeTracksInterface } from "../compareMatchingTracks/interfaceGetAlikeTracks";
 
