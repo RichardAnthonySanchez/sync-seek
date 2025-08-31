@@ -52,9 +52,9 @@ function controllerAddTrack() {
       createTrackInput();
     } //else if (event.target.id === "extend-similar-tracks") {
     //extendSimilarTracksInterface();}
-    else if (event.target.id === "delete-artists") {
-      clearAllTracksInterface();
-    } else if (event.target.id === "export-tracks") {
+    //else if (event.target.id === "delete-artists") {
+    //clearAllTracksInterface(); }
+    else if (event.target.id === "export-tracks") {
       await exportToExcelInterface();
     } else if (event.target.id === "view-tracks-in-database") {
       await interfaceViewTracksFromDatabase();

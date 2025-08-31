@@ -2,6 +2,7 @@ import viewButtonDeleteArtists from "./deleteArtists/viewButtonDeleteArtists";
 import { createTrackGetSimilarForm } from "./trackGetSimilar/views/viewTrackGetSimilarForm";
 import controllerAddTrack from "./trackGetSimilar/controllerAddTrack";
 import { controllerExtendSimilarArtists } from "./trackGetSimilar/extendListHydration/controllerExtendSimilarArtists";
+import { controllerDeleteArtists } from "./trackGetSimilar/tracksDatabase/controllerDeleteArtists";
 import viewAddTrackButton from "./trackGetSimilar/views/viewAddTrackButton";
 import ViewExtendSimilarTracksButton from "./trackGetSimilar/extendListHydration/viewExtendSimilarTracksButton";
 import { initializeIndexedDB } from "./trackGetSimilar/tracksDatabase/interfaceTracksLibraryDatabase";
@@ -27,6 +28,7 @@ function component() {
   ViewMatchingTracks();
   ViewStopFetching();
   controllerExtendSimilarArtists();
+  controllerDeleteArtists();
 }
 
 document.body.appendChild(component());
