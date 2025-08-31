@@ -1,14 +1,14 @@
 import {
   getAlikeTracksInterface,
   interfaceTrackGetSimilar,
-} from "./interfaceTrackGetSimiliar";
+} from "../interfaceTrackGetSimiliar";
 
 import {
   getStoredSimilarTrackListsInterface,
   storeSimilarTracksList,
-} from "./tracksDatabase/interfaceTracksLibraryDatabase";
+} from "../tracksDatabase/interfaceTracksLibraryDatabase";
 
-import { getExistingSongsSet } from "./filterPreFetch/interfaceFilterPreFetch";
+import { getExistingSongsSet } from "../filterPreFetch/interfaceFilterPreFetch";
 
 let stopRequested = false;
 
