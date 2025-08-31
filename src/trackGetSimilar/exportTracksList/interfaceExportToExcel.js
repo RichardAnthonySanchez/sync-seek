@@ -1,4 +1,4 @@
-import { getAlikeTracksInterface } from "../interfaceTrackGetSimiliar";
+import { getAlikeTracksInterface } from "../compareMatchingTracks/interfaceGetAlikeTracks";
 import exportToExcel from "./exportToExcel";
 import { getStoredSimilarTrackListsInterface } from "../tracksDatabase/interfaceTracksLibraryDatabase";
 

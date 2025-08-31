@@ -1,7 +1,6 @@
-import {
-  getAlikeTracksInterface,
-  interfaceTrackGetSimilar,
-} from "../interfaceTrackGetSimiliar";
+import { interfaceTrackGetSimilar } from "../interfaceTrackGetSimiliar";
+
+import { getAlikeTracksInterface } from "../compareMatchingTracks/interfaceGetAlikeTracks";
 
 import {
   getStoredSimilarTrackListsInterface,

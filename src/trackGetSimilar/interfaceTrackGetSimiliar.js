@@ -1,15 +1,6 @@
-import {
-  getStoredSimilarTrackListsInterface,
-  storeSimilarTracksList,
-} from "./tracksDatabase/interfaceTracksLibraryDatabase";
+import { storeSimilarTracksList } from "./tracksDatabase/interfaceTracksLibraryDatabase";
 import fetchTrackGetSimilar from "./fetchTracks/fetchTrackGetSimilar";
 import { fetchTrackInfo } from "./fetchTracks/fetchTrackGetSimilar";
-import modelFilterTracks from "./compareMatchingTracks/modelFilterTracks";
-//import { deleteMasterKeysLocally } from "./storeSimilarTracks";
-//import { createTrackInput } from "./views/viewTrackGetSimilarForm";
-
-//to-do list
-// organize module files into several sub-directories for readability
 
 export async function fetchFromFilteredQueue(queue) {
   // create conditionals for an empty queue or unexpected variables
@@ -48,35 +39,3 @@ export async function interfaceTrackGetSimilar(artist, song) {
   console.log(similarTracks);
   return similarTracks;
 }
-/*
-export function interfaceCreateTrackInput() {
-  // put this in the views module
-  createTrackInput();
-}*/
-
-export async function getAlikeTracksInterface(lists) {
-  // this should be in the track matching module
-  try {
-    if (lists && Array.isArray(lists) && lists.length > 0) {
-      const alikeTracks = modelFilterTracks.getAlikeTracks(lists);
-      console.log(`${alikeTracks.length} a like tracks found`);
-      return alikeTracks;
-    } else {
-      throw new Error(
-        "Invalid input: lists must be an array with at least one element"
-      );
-    }
-  } catch (error) {
-    console.error(error.message);
-  } finally {
-    // clear the list data for future requests for getting alike tracks
-    modelFilterTracks.clearMatchingTracks();
-  }
-}
-
-/*
-export function deleteMasterKeysInterface() {
-  // i don't think this is used any more
-  deleteMasterKeysLocally();
-}
-*/
