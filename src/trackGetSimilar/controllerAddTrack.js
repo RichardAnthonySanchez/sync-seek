@@ -6,7 +6,7 @@ import {
   interfaceViewTracksFromDatabase,
 } from "./tracksDatabase/interfaceTracksLibraryDatabase";
 import {
-  extendSimilarTracksInterface,
+  //extendSimilarTracksInterface,
   stopFetching,
 } from "./extendListHydration/interfaceListHydration";
 import {
@@ -21,6 +21,9 @@ import {
 
 import { interfaceGetLists } from "./filterSeedTracks/interfaceCompareTracks";
 import { createTrackInput } from "./views/viewTrackGetSimilarForm";
+
+//todo:
+// separate these click events to be in separate modules
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -47,9 +50,9 @@ function controllerAddTrack() {
       interfaceFilteredQueue.clearFilteredQueue();
     } else if (event.target.id === "add-track") {
       createTrackInput();
-    } else if (event.target.id === "extend-similar-tracks") {
-      extendSimilarTracksInterface();
-    } else if (event.target.id === "delete-artists") {
+    } //else if (event.target.id === "extend-similar-tracks") {
+    //extendSimilarTracksInterface();}
+    else if (event.target.id === "delete-artists") {
       clearAllTracksInterface();
     } else if (event.target.id === "export-tracks") {
       await exportToExcelInterface();
