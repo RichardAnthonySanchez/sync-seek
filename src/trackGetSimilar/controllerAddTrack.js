@@ -1,14 +1,5 @@
 import { fetchFromFilteredQueue } from "./fetchTracks/interfaceFetchTracks";
-import { getAlikeTracksInterface } from "./compareMatchingTracks/interfaceGetAlikeTracks";
-import { exportToExcelInterface } from "./exportTracksList/interfaceExportToExcel";
-import {
-  //clearAllTracksInterface,
-  interfaceViewTracksFromDatabase,
-} from "./tracksDatabase/interfaceTracksLibraryDatabase";
-import {
-  //extendSimilarTracksInterface,
-  stopFetching,
-} from "./extendListHydration/interfaceListHydration";
+
 import {
   interfaceCreateQueryObject,
   interfaceQueueTrackInQuery,
@@ -19,7 +10,6 @@ import {
   interfaceFilteredQueue,
 } from "./filterPreFetch/interfaceFilterPreFetch";
 
-import { interfaceGetLists } from "./filterSeedTracks/interfaceCompareTracks";
 import { createTrackInput } from "./views/viewTrackGetSimilarForm";
 
 //todo:
@@ -80,12 +70,12 @@ function controllerAddTrack() {
       const filteredQueue = await compareQueueToDB(queue);
       fetchFromFilteredQueue(filteredQueue);
       interfaceFilteredQueue.clearFilteredQueue();
-    } else if (event.target.id === "view-matching-tracks") {
-      let lists = await interfaceGetLists();
-      console.log(lists);
-      let matchingTracks = await getAlikeTracksInterface(lists);
-      console.log(matchingTracks);
-    }
+    } //else if (event.target.id === "view-matching-tracks") {
+    //let lists = await interfaceGetLists();
+    //console.log(lists);
+    //let matchingTracks = await getAlikeTracksInterface(lists);
+    //console.log(matchingTracks);
+    //}
   });
 }
 
