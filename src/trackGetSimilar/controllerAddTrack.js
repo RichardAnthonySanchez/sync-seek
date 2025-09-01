@@ -2,7 +2,7 @@ import { fetchFromFilteredQueue } from "./fetchTracks/interfaceFetchTracks";
 import { getAlikeTracksInterface } from "./compareMatchingTracks/interfaceGetAlikeTracks";
 import { exportToExcelInterface } from "./exportTracksList/interfaceExportToExcel";
 import {
-  clearAllTracksInterface,
+  //clearAllTracksInterface,
   interfaceViewTracksFromDatabase,
 } from "./tracksDatabase/interfaceTracksLibraryDatabase";
 import {
@@ -24,6 +24,8 @@ import { createTrackInput } from "./views/viewTrackGetSimilarForm";
 
 //todo:
 // separate these click events to be in separate modules
+// prepare for edge cases
+// set up testing
 
 function controllerAddTrack() {
   document.addEventListener("click", async (event) => {
@@ -54,9 +56,9 @@ function controllerAddTrack() {
     //extendSimilarTracksInterface();}
     //else if (event.target.id === "delete-artists") {
     //clearAllTracksInterface(); }
-    else if (event.target.id === "export-tracks") {
-      await exportToExcelInterface();
-    } else if (event.target.id === "view-tracks-in-database") {
+    //else if (event.target.id === "export-tracks") {
+    //await exportToExcelInterface();}
+    else if (event.target.id === "view-tracks-in-database") {
       await interfaceViewTracksFromDatabase();
     } else if (event.target.id === "view-queue") {
       await interfaceFilteredQueue.viewFilteredQueue();
