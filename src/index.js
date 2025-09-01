@@ -15,6 +15,7 @@ import viewExportTracks from "./trackGetSimilar/exportTracksList/viewExportTrack
 import { controllerExportTracks } from "./trackGetSimilar/exportTracksList/controllerExportTracks";
 import { controllerViewTracksInDatabase } from "./trackGetSimilar/tracksDatabase/controllerViewTracksInDatabase";
 import { controllerViewQueue } from "./trackGetSimilar/filterPreFetch/controllerViewQueue";
+import { controllerStopFetching } from "./trackGetSimilar/extendListHydration/controllerStopFetching";
 
 function component() {
   createTrackGetSimilarForm();
@@ -35,6 +36,7 @@ function component() {
   controllerExportTracks();
   controllerViewTracksInDatabase();
   controllerViewQueue();
+  controllerStopFetching();
 }
 
 document.body.appendChild(component());
