@@ -58,9 +58,9 @@ function controllerAddTrack() {
     //clearAllTracksInterface(); }
     //else if (event.target.id === "export-tracks") {
     //await exportToExcelInterface();}
-    else if (event.target.id === "view-tracks-in-database") {
-      await interfaceViewTracksFromDatabase();
-    } else if (event.target.id === "view-queue") {
+    //else if (event.target.id === "view-tracks-in-database") {
+    //await interfaceViewTracksFromDatabase();}
+    else if (event.target.id === "view-queue") {
       await interfaceFilteredQueue.viewFilteredQueue();
     } else if (event.target.id === "view-stop-fetching") {
       stopFetching();

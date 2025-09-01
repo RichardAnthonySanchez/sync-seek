@@ -13,6 +13,7 @@ import ViewMatchingTracks from "./trackGetSimilar/compareMatchingTracks/viewMatc
 import ViewStopFetching from "./trackGetSimilar/extendListHydration/viewStopFetching";
 import viewExportTracks from "./trackGetSimilar/exportTracksList/viewExportTracks";
 import { controllerExportTracks } from "./trackGetSimilar/exportTracksList/controllerExportTracks";
+import { controllerViewTracksInDatabase } from "./trackGetSimilar/tracksDatabase/controllerViewTracksInDatabase";
 
 function component() {
   createTrackGetSimilarForm();
@@ -31,6 +32,7 @@ function component() {
   controllerExtendSimilarArtists();
   controllerDeleteArtists();
   controllerExportTracks();
+  controllerViewTracksInDatabase();
 }
 
 document.body.appendChild(component());
