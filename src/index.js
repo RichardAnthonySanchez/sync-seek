@@ -18,10 +18,10 @@ import { controllerViewQueue } from "./trackGetSimilar/filterPreFetch/controller
 import { controllerStopFetching } from "./trackGetSimilar/extendListHydration/controllerStopFetching";
 import { controllerViewMatchingTracks } from "./trackGetSimilar/compareMatchingTracks/controllerViewMatchingTracks";
 import { controllerSubmitTestSongs } from "./trackGetSimilar/fetchTracks/controllerTestSongs";
+import { controllerTrackGetSimilarForm } from "./trackGetSimilar/fetchTracks/controllerTrackGetSimilarForm";
 
 function component() {
   createTrackGetSimilarForm();
-  //artistQuery(); this is the get similar artists query
   controllerAddTrack();
   viewAddTrackButton();
   viewButtonDeleteArtists();
@@ -41,6 +41,7 @@ function component() {
   controllerStopFetching();
   controllerViewMatchingTracks();
   controllerSubmitTestSongs();
+  controllerTrackGetSimilarForm();
 }
 
 document.body.appendChild(component());
