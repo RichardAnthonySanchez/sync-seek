@@ -14,6 +14,7 @@ import ViewStopFetching from "./trackGetSimilar/extendListHydration/viewStopFetc
 import viewExportTracks from "./trackGetSimilar/exportTracksList/viewExportTracks";
 import { controllerExportTracks } from "./trackGetSimilar/exportTracksList/controllerExportTracks";
 import { controllerViewTracksInDatabase } from "./trackGetSimilar/tracksDatabase/controllerViewTracksInDatabase";
+import { controllerViewQueue } from "./trackGetSimilar/filterPreFetch/controllerViewQueue";
 
 function component() {
   createTrackGetSimilarForm();
@@ -33,6 +34,7 @@ function component() {
   controllerDeleteArtists();
   controllerExportTracks();
   controllerViewTracksInDatabase();
+  controllerViewQueue();
 }
 
 document.body.appendChild(component());

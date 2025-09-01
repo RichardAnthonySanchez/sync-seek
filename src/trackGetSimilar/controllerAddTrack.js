@@ -60,9 +60,9 @@ function controllerAddTrack() {
     //await exportToExcelInterface();}
     //else if (event.target.id === "view-tracks-in-database") {
     //await interfaceViewTracksFromDatabase();}
-    else if (event.target.id === "view-queue") {
-      await interfaceFilteredQueue.viewFilteredQueue();
-    } else if (event.target.id === "view-stop-fetching") {
+    //else if (event.target.id === "view-queue") {
+    //await interfaceFilteredQueue.viewFilteredQueue();}
+    else if (event.target.id === "view-stop-fetching") {
       stopFetching();
     } else if (event.target.id === "submit-test-songs") {
       const songName = "matador";
