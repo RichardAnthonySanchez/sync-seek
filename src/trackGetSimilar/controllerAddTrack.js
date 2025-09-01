@@ -54,6 +54,7 @@ function controllerAddTrack() {
     //await interfaceFilteredQueue.viewFilteredQueue();}
     //else if (event.target.id === "view-stop-fetching") {
     //stopFetching();}
+    /*
     else if (event.target.id === "submit-test-songs") {
       const songName = "matador";
       const artistName = "the buttertones";
@@ -70,7 +71,8 @@ function controllerAddTrack() {
       const filteredQueue = await compareQueueToDB(queue);
       fetchFromFilteredQueue(filteredQueue);
       interfaceFilteredQueue.clearFilteredQueue();
-    } //else if (event.target.id === "view-matching-tracks") {
+    }  */
+    //else if (event.target.id === "view-matching-tracks") {
     //let lists = await interfaceGetLists();
     //console.log(lists);
     //let matchingTracks = await getAlikeTracksInterface(lists);

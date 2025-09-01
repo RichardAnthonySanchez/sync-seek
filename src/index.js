@@ -17,6 +17,7 @@ import { controllerViewTracksInDatabase } from "./trackGetSimilar/tracksDatabase
 import { controllerViewQueue } from "./trackGetSimilar/filterPreFetch/controllerViewQueue";
 import { controllerStopFetching } from "./trackGetSimilar/extendListHydration/controllerStopFetching";
 import { controllerViewMatchingTracks } from "./trackGetSimilar/compareMatchingTracks/controllerViewMatchingTracks";
+import { controllerSubmitTestSongs } from "./trackGetSimilar/fetchTracks/controllerTestSongs";
 
 function component() {
   createTrackGetSimilarForm();
@@ -39,6 +40,7 @@ function component() {
   controllerViewQueue();
   controllerStopFetching();
   controllerViewMatchingTracks();
+  controllerSubmitTestSongs();
 }
 
 document.body.appendChild(component());
