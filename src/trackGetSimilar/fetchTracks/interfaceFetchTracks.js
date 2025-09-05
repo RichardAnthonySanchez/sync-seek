@@ -8,7 +8,7 @@ export async function fetchFromFilteredQueue(queue) {
     const song = input.songName;
     const artist = input.artistName;
 
-    const trackInfo = await fetchTrackInfo(artist, song);
+    const trackInfo = await fetchTrackInfo(artist, song); // this wont work if last fm cant find the track. set edge case here
     console.log(trackInfo);
     const songName = trackInfo.track.name;
     const artistName = trackInfo.track.artist.name;

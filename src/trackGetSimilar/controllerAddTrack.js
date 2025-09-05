@@ -1,7 +1,6 @@
 import { createTrackInput } from "./views/viewTrackGetSimilarForm";
 
 //todo:
-// separate these click events to be in separate modules
 // prepare for edge cases
 // set up testing
 
