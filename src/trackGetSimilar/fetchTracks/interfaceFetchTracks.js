@@ -10,25 +10,49 @@ export async function fetchFromFilteredQueue(queue) {
 
     const trackInfo = await fetchTrackInfo(artist, song); // this wont work if last fm cant find the track. set edge case here
     console.log(trackInfo);
-    const songName = trackInfo.track.name;
-    const artistName = trackInfo.track.artist.name;
-    const playCount = trackInfo.track.playcount;
-    const trackUrl = trackInfo.track.url;
-    const imageUrl = trackInfo.track.album.image[3]["#text"];
-    const similarTracks = await interfaceTrackGetSimilar(artist, song);
-
-    const trackInfoObject = {
-      songName: songName,
-      artistName: artistName,
-      playcount: playCount,
-      url: trackUrl,
-      image: imageUrl,
-      similarTracks: similarTracks.similartracks.track,
-      seedTrack: true,
-    };
-    console.log(trackInfoObject); //write some logic to save individual tracks to the database
-    await storeSimilarTracksList(trackInfoObject);
+    if (validateTrackInfo(trackInfo)) {
+      const trackInfoObject = await trackInfoToSchema(trackInfo);
+      console.log(trackInfoObject);
+      await storeSimilarTracksList(trackInfoObject);
+    }
   });
+}
+
+async function trackInfoToSchema(trackInfo) {
+  const songName = trackInfo.track.name;
+  const artistName = trackInfo.track.artist.name;
+  const playCount = trackInfo.track.playcount;
+  const trackUrl = trackInfo.track.url;
+  const imageUrl = trackInfo.track.album.image[3]["#text"];
+  const similarTracks = await interfaceTrackGetSimilar(artistName, songName);
+
+  const trackInfoObject = {
+    songName: songName,
+    artistName: artistName,
+    playcount: playCount,
+    url: trackUrl,
+    image: imageUrl,
+    similarTracks: similarTracks.similartracks.track,
+    seedTrack: true,
+  };
+  return trackInfoObject;
+}
+
+export function validateTrackInfo(info) {
+  if (!isObject(info)) {
+    throw new Error(`api isn't returning an object`, info);
+  }
+  if (!info.track.name) {
+    throw new Error(`api can't find the track name`);
+  }
+  if (!info.track.artist.name) {
+    throw new Error(`api can't find the track name`);
+  }
+  return true;
+}
+
+function isObject(obj) {
+  return typeof obj === "object";
 }
 
 export async function interfaceTrackGetSimilar(artist, song) {
