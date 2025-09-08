@@ -8,12 +8,18 @@ export async function fetchFromFilteredQueue(queue) {
     const song = input.songName;
     const artist = input.artistName;
 
-    const trackInfo = await fetchTrackInfo(artist, song); // this wont work if last fm cant find the track. set edge case here
-    console.log(trackInfo);
-    if (validateTrackInfo(trackInfo)) {
-      const trackInfoObject = await trackInfoToSchema(trackInfo);
-      console.log(trackInfoObject);
-      await storeSimilarTracksList(trackInfoObject);
+    let trackInfo = null;
+
+    try {
+      trackInfo = await fetchTrackInfo(artist, song);
+      if (!validateTrackInfo(trackInfo)) {
+        throw new Error("Error fetching track info", trackInfo);
+      } else {
+        const trackInfoObject = await trackInfoToSchema(trackInfo);
+        await storeSimilarTracksList(trackInfoObject);
+      }
+    } catch (error) {
+      console.error("DEBUG:", error);
     }
   });
 }
@@ -39,16 +45,24 @@ async function trackInfoToSchema(trackInfo) {
 }
 
 export function validateTrackInfo(info) {
-  if (!isObject(info)) {
-    throw new Error(`api isn't returning an object`, info);
+  try {
+    if (!isObject(info)) {
+      console.error("DEBUG: api isn't returning an object", info);
+      return false;
+    }
+    if (!info.track?.name) {
+      console.error("DEBUG: api can't find the track name");
+      return false;
+    }
+    if (!info.track?.artist?.name) {
+      console.error("DEBUG: api can't find the artist name");
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("DEBUG (validation error):", error);
+    return false;
   }
-  if (!info.track.name) {
-    throw new Error(`api can't find the track name`);
-  }
-  if (!info.track.artist.name) {
-    throw new Error(`api can't find the track name`);
-  }
-  return true;
 }
 
 function isObject(obj) {
