@@ -8,6 +8,6 @@ test("has track name and artist name", () => {
   ).toBeTruthy();
 });
 
-test("throws for functions", () => {
-  expect(() => validateTrackInfo(Error)).toThrow();
+test("returns false for functions", () => {
+  expect(validateTrackInfo(Error)).toBeFalsy();
 });

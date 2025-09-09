@@ -23,7 +23,7 @@ function validateName(value, fieldName = "Input") {
   return true;
 }
 
-let tracksQuery = [];
+let tracksQuery = []; // we could wrap this global into a IIFE to prevent unexpected overwrites to its value
 
 function isDuplicate(trackA, trackB) {
   return JSON.stringify(trackA) === JSON.stringify(trackB);
