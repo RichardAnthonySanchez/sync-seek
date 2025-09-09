@@ -51,7 +51,7 @@ const modelFilterTracks = (function () {
         return; // Skip to the next track if required fields are missing
       }
 
-      const trackName = track.name;
+      const trackName = track.name; // change this to songName? will trackName appear in matching tracks?
       const artistName = track.artist.name;
       const playCount = track.playcount;
       const trackUrl = track.url;
