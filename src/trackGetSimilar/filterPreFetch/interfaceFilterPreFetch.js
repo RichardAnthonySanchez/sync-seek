@@ -30,7 +30,7 @@ export async function compareQueueToDB(queue) {
   for (const q of deduplicatedQueue) {
     // Check query tracks against tracks already in the database
     console.log(JSON.stringify(q));
-    const key = `${q.songName}`;
+    const key = `${q.songName}|${q.artistName}`;
     // we can change the key here to a ${q.songName}|${q.artistName} pattern. Helps with tracks with the same name;
     if (!existingSongsSet.has(key)) {
       console.log("Adding", key);

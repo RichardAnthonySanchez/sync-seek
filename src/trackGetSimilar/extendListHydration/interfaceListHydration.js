@@ -69,12 +69,12 @@ function transformToSchema(track, similarTracks) {
 
 function storeUniqueTracks(track, trackSet) {
   // use the track value to compare with the set of tracks already in the database
-  const key = `${track.songName}`;
+  const key = `${track.songName}|${track.artistName}`;
   if (!trackSet.has(key)) {
     console.log("Adding", track);
     // storing logic
     storeSimilarTracksList(track);
-    trackSet.add(key); // I dont think this is changing the existingSongSet as expected
+    trackSet.add(key);
   } else {
     console.warn(
       `skipping ${track.songName} because it already exists in the database`
