@@ -22,7 +22,7 @@ async function exportToExcel(data) {
 
   // 3. Loop through trackData and add rows to the worksheet
   for (const similarTrack of data) {
-    const trackName = similarTrack.trackName;
+    const trackName = similarTrack.songName;
     const artistName = similarTrack.artistName;
     const count = similarTrack.count;
     const playCount = similarTrack.playCount;

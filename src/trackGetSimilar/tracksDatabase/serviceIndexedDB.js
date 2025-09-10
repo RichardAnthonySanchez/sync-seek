@@ -1,6 +1,6 @@
 export const indexedDBService = (function () {
   let db;
-  let versionNumber = 3;
+  let versionNumber = 4;
 
   return {
     intializeDB: function () {
@@ -31,21 +31,27 @@ export const indexedDBService = (function () {
         };
       });
     },
-    saveSimilarTracksList: function (artist, song, list) {
+    saveSimilarTracksList: function (trackObj) {
       console.log("attempting to save similar songs to the database...");
       const transaction = db.transaction("tracks", "readwrite");
       const store = transaction.objectStore("tracks");
-      const trackData = {
-        trackName: song,
-        artistName: artist,
-        similarTracks: list,
-      };
-
-      const request = store.add(trackData);
+      console.log(trackObj);
+      let trackName;
+      if (trackObj.songName) {
+        trackName = trackObj.songName;
+      } else if (trackObj.track) {
+        trackName = trackObj.track;
+      } else {
+        console.error(`track name is throwing an error ${trackObj}`);
+      }
+      const request = store.put({
+        ...trackObj,
+        trackName: trackName,
+      });
 
       request.onsuccess = function () {
         console.log(
-          `Track ${song} by ${artist} saved successfully to the database.`
+          `Track ${trackObj.songName} by ${trackObj.artistName} saved successfully to the database.` // expanded list feature changes the data property names. Make sure the property names match
         );
       };
 
@@ -104,6 +110,23 @@ export const indexedDBService = (function () {
         console.error("Database error saving key:", request.error);
       };
     },
+    getAllFromDatabase: function () {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction("tracks", "readonly");
+        const store = transaction.objectStore("tracks");
+        const request = store.getAll();
+
+        request.onsuccess = function (event) {
+          const allTracks = event.target.result;
+          resolve(allTracks);
+          return allTracks;
+        };
+        request.onerror = function () {
+          reject(request.error);
+        };
+      });
+    },
+
     getAllSimilarTracksList: function () {
       return new Promise((resolve, reject) => {
         const transaction = db.transaction("tracks", "readonly");
